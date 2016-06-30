@@ -1,0 +1,3 @@
+[submodule "latex-beamerposter"]
+	path = latex-beamerposter
+	url = https://github.com/wtbarnes/latex-beamerposter.git
