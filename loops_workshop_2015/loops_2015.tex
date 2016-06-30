@@ -1,17 +1,19 @@
 \documentclass[final]{beamer}
 \def\RightLogoWidth{0.7}
-\def\RightLogo{/Users/willbarnes/Documents/Rice/Posters/RiceLogo_TMCMYK300DPI.jpg}
+\def\RightLogo{/Users/willbarnes/Documents/Rice/Posters/posters/logos/RiceLogo_TMCMYK300DPI.jpg}
 \def\LeftLogoWidth{1.3}
-\def\LeftLogo{/Users/willbarnes/Documents/Rice/Posters/coronal_loops_workshop_VII_logo.jpg}
+\def\LeftLogo{/Users/willbarnes/Documents/Rice/Posters/posters/logos/coronal_loops_workshop_VII_logo.jpg}
+\def\GitHubLogoWidth{0.014\paperwidth}
+\def\GitHubLogo{/Users/willbarnes/Documents/Rice/Posters/posters/logos/GitHub-Mark.png}
 \mode<presentation>
 {
-\usetheme{I6dv}
+\usetheme{I6dv_custom}
 }
 \setbeamertemplate{caption}[numbered]
 %Include packages
 \usepackage{soul,color,verbatim}
 \usepackage{type1cm}
-\usepackage{calc} 
+\usepackage{calc}
 \usepackage{times,mathptmx}
 \usepackage{amsmath,amsthm, amssymb, latexsym}
 \usepackage{empheq}
@@ -22,7 +24,7 @@
 \usepackage{subfigure}
 \usepackage[english]{babel}
 \usepackage[latin1]{inputenc}
-\usepackage[orientation=portrait,size=a0,scale=1.0,debug]{beamerposter}
+\usepackage[orientation=portrait,size=a0,scale=1.0,debug]{beamer/beamerposter/beamerposter}
 %Define new commands here
 \newcommand{\ang}{\AA~}
 \newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
@@ -79,7 +81,7 @@
 						\item Semi-circular loop symmetric about the apex
 						\item $c_2=\bar{T}/T_a$ and $c_3=T_0/T_a$ are constant and independent of species.
 						\item Equations closed by ideal gas law for both species $\rightarrow$ $p_e=k_BnT_e,~p_i=k_BnT_i$
-					\end{enumerate} 
+					\end{enumerate}
 					\item Applying these assumptions to the field-aligned two-fluid hydrodynamic equations and integrating over the coronal and transition region portions of the loop, we derive \alert{two-fluid, time-dependent, spatially-averaged equations for $n,~T_e,~T_i,~p_e,~p_i$},
 					\begin{empheq}[box=\widefbox]{align}
 						\frac{d}{dt}\bar{n} &= \frac{c_2(\gamma-1)}{c_3\gamma Lk_B\bar{T}_e}(\psi_{TR} - F^{(0)}_{c,e}-\mathcal{R}_{TR}),\label{eq:ebtf_n} \\[0.5em]
@@ -92,7 +94,7 @@
 						\psi_{TR} =  \int_{TR}\mathrm{d}s~v\frac{d}{ds}p_e \approx \frac{1}{1 + \xi}(F^{(0)}_{c,e} + \mathcal{R}_{TR} - \xi F^{(0)}_{c,i}),\quad
 						\psi_{C} = \int_{C}\mathrm{d}s~v\frac{d}{ds}p_e \approx \bar{v}p_e^{(a)} - (p_ev)_0,\quad
 						\xi = \frac{T_e^{(0)}}{T_i^{(0)}}.
-					\end{align*} 
+					\end{align*}
 				\end{itemize}
 			\end{block}
 			%Comparison
