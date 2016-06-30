@@ -1,4 +1,5 @@
 ## Core latex/pdflatex auxiliary files:
+*.lb
 *.aux
 *.lof
 *.log
@@ -18,6 +19,11 @@
 # *.ps
 # *.eps
 # *.pdf
+# only include these files if they are in a figure folder (can't seem to get this to work...)
+# !**/figures/*.eps
+# !**/figures/*.pdf
+# !logos/*.eps
+# !logos/*.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
