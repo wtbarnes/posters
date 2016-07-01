@@ -1,0 +1,75 @@
+\documentclass[final]{beamer}
+%set image/logo options
+\def\RightLogoWidth{0.7}
+\def\RightLogo{/Users/willbarnes/Documents/Rice/Posters/posters/logos/RiceLogo_TMCMYK300DPI.jpg}
+\def\LeftLogoWidth{2.0}
+\def\LeftLogo{/Users/willbarnes/Documents/Rice/Posters/posters/logos/shine-logo.png}
+\def\GitHubLogoWidth{0.014\paperwidth}
+\def\GitHubLogo{/Users/willbarnes/Documents/Rice/Posters/posters/logos/GitHub-Mark.png}
+%set theme
+\mode<presentation>
+{
+\usetheme{I6dv_custom}
+}
+\setbeamertemplate{caption}[numbered]
+%Include packages
+\usepackage{soul,color,verbatim}
+\usepackage{type1cm}
+\usepackage{calc}
+\usepackage{times,mathptmx}
+\usepackage{amsmath,amsthm, amssymb, latexsym}
+\usepackage{empheq}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage[numbers]{natbib}
+\usepackage{multicol}
+\usepackage{subfigure}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+%setup beamerposter package
+\usepackage[orientation=portrait,size=custom,width=91.44,height=121.92,scale=1.0]{beamer/beamerposter/beamerposter}
+%new commands go here
+\newcommand{\ang}{\AA~} %alias angstrom
+\setbeamerfont{caption}{size=\footnotesize} %make caption size small
+%Set author and title
+\title[Modeling Nanoflare Trains]{Understanding the Impact of Nanoflare Heating Frequency on the Observed Emission Measure Distribution}
+\author[Barnes, Cargill, \& Bradshaw]{Will T. Barnes, Peter J. Cargill, \& Stephen J. Bradshaw}
+\institute[Rice University]{Department of Physics and Astronomy, Rice University\\
+Space and Atmospheric Physics, The Blackett Laboratory, Imperial College London\\
+School of Mathematics and Statistics, University of St. Andrews}
+\date{11-15 July, 2016}
+
+%start poster
+%everything goes in one frame
+\begin{document}
+\begin{frame}
+  %start columns environment to slice up the page horizontally
+  \begin{columns}[t]
+  \hfill
+  %first column
+  \begin{column}{0.49\linewidth}
+    %introduction
+    \begin{block}{Introduction}
+    \end{block}
+    %hydrodynamics
+    \begin{block}{Hydrodynamic Modeling}
+    \end{block}
+  \end{column}
+  %second column
+  \begin{column}{0.49\linewidth}
+    %energy budget
+    \begin{block}{Energy Budget}
+    \end{block}
+    %heating statistics
+    \begin{block}{Heating Statistics}
+    \end{block}
+    %conclusions
+    \begin{block}{Conclusions}
+    \end{block}
+    %references
+    \begin{block}{References}
+    \end{block}
+  \end{column}
+  \end{columns}
+\end{frame}
+\end{document}
