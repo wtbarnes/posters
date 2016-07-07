@@ -1,11 +1,16 @@
 \documentclass[final]{beamer}
 %set image/logo options
-\def\RightLogoWidth{0.7}
+\def\RightLogoWidth{0.8}
+\def\RightLogoPaddingTop{0.25cm}
+\def\RightLogoPaddingBottom{0.5cm}
 \def\RightLogo{/Users/willbarnes/Documents/Rice/Posters/posters/logos/RiceLogo_TMCMYK300DPI.jpg}
-\def\LeftLogoWidth{2.0}
+\def\LeftLogoWidth{2.3}
+\def\LeftLogoPaddingTop{1cm}
+\def\LeftLogoPaddingBottom{0.5cm}
 \def\LeftLogo{/Users/willbarnes/Documents/Rice/Posters/posters/logos/shine-logo.png}
 \def\GitHubLogoWidth{0.014\paperwidth}
-\def\GitHubLogo{/Users/willbarnes/Documents/Rice/Posters/posters/logos/GitHub-Mark.png}
+%\def\GitHubLogo{/Users/willbarnes/Documents/Rice/Posters/posters/logos/GitHub-Mark-120px-plus.png}
+%\def\GitHubUser{wtbarnes}
 %set theme
 \mode<presentation>
 {
@@ -16,7 +21,7 @@
 \usepackage{soul,color,verbatim}
 \usepackage{type1cm}
 \usepackage{calc}
-\usepackage{times,mathptmx}
+%\usepackage{times,mathptmx}
 \usepackage{amsmath,amsthm, amssymb, latexsym}
 \usepackage{empheq}
 \usepackage{graphicx}
@@ -25,14 +30,23 @@
 \usepackage{multicol}
 \usepackage{subfigure}
 \usepackage[english]{babel}
-\usepackage[latin1]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, arrows.meta}
 %setup beamerposter package
 \usepackage[orientation=portrait,size=custom,width=91.44,height=121.92,scale=1.0]{beamer/beamerposter/beamerposter}
+%tikz configuration
+%Set tikz options
+\tikzstyle{box} = [rectangle, rounded corners, text centered, draw=black]
+\tikzstyle{ghost} = [rectangle, rounded corners, text centered, draw=white]
+\tikzstyle{arrow} = [-{Latex[width=2mm]},thick]
+\tikzstyle{every node} = [font=\footnotesize]
 %new commands go here
 \newcommand{\ang}{\AA~} %alias angstrom
 \setbeamerfont{caption}{size=\footnotesize} %make caption size small
+
 %Set author and title
-\title[Modeling Nanoflare Trains]{Understanding the Impact of Nanoflare Heating Frequency on the Observed Emission Measure Distribution}
+\title[Modeling Nanoflare Trains]{Understanding the Impact of Nanoflare Heating Frequency\\on the Observed Emission Measure Distribution}
 \author[Barnes, Cargill, \& Bradshaw]{Will T. Barnes, Peter J. Cargill, \& Stephen J. Bradshaw}
 \institute[Rice University]{Department of Physics and Astronomy, Rice University\\
 Space and Atmospheric Physics, The Blackett Laboratory, Imperial College London\\
@@ -46,28 +60,153 @@ School of Mathematics and Statistics, University of St. Andrews}
   %start columns environment to slice up the page horizontally
   \begin{columns}[t]
   \hfill
-  %first column
+  %%
+  %%first column
   \begin{column}{0.49\linewidth}
     %introduction
     \begin{block}{Introduction}
+    \begin{itemize}
+      \item Nanoflare model of \citet{parker_nanoflares_1988}: corona heated by impulsive ($\ll\tau_{cool}$), low-energy ($10^{24}$ erg) events produced by twisting, braiding of field lines rooted in the photosphere
+      \item ``Smoking gun'' of nanoflare heating is the faint, high-temperature component of the emission measure distribution \citep{cargill_implications_1994,cargill_nanoflare_2004}
+      \item Fundamental question: what is the frequency of energy release in the solar corona? Two extreme cases:
+      \begin{itemize}
+        \item Low-frequency heating: Time between successive events is much greater than a typical loop cooling time (i.e. approaches the single pulse case)
+        \item High-frequency heating: Time between successive events is much smaller than a typical loop cooling time (i.e. approaches the steady heating case)
+      \end{itemize}
+      \item \textbf{Goal:} \alert{Use hydrodynamic loop models to determine the influence of heating parameters, including the heating frequency, on the emission measure distribution and associated observables.}
+    \end{itemize}
     \end{block}
     %hydrodynamics
     \begin{block}{Hydrodynamic Modeling}
+      \begin{itemize}
+        \item Zero-dimensional Enthalpy-based Thermal Evolution of Loops (EBTEL) model of \citet{klimchuk_highly_2008,cargill_enthalpy-based_2012} allows for efficient modeling of many thousands of loops
+        \item We use a modified form of the EBTEL model to treat the electron and ion populations separately \citep[for more details, see][submitted]{barnes_inference_2016}
+        \item Applying the ``EBTEL method'' to the two-fluid hydrodynamic equations \citep[as given in][]{bradshaw_influence_2013}, the modified two-fluid EBTEL equations are,
+        \begin{align}
+          \frac{d}{dt}\bar{p}_e &= \frac{\gamma - 1}{L}\left\lbrack\psi_{TR} - (\mathcal{R}_{TR} + \mathcal{R}_C)\right\rbrack + k_B\bar{n}\nu_{ei}(\bar{T}_i - \bar{T}_e) + (\gamma - 1)\bar{Q}_e,\label{eq:ebtel_pe} \\[0.5em]
+		      \frac{d}{dt}\bar{p}_i &= -\frac{\gamma - 1}{L}\psi_{TR} + k_B\bar{n}\nu_{ei}(\bar{T}_e - \bar{T}_i) + (\gamma - 1)\bar{Q}_i,\label{eq:ebtel_pi}\\[0.5em]
+		      \frac{d}{dt}\bar{n} &= \frac{c_2(\gamma - 1)}{c_3\gamma Lk_B\bar{T}_e}\left(\psi_{TR} - F_{ce,0} - \mathcal{R}_{TR}\right),\label{eq:ebtel_n}
+        \end{align}
+        where $\psi_{TR}$ is a term included to maintain charge and current neutrality and $\nu_{ei}$ is the electron-ion binary Coulomb collision frequency
+        \item Assume quasi-neutrality, $n_e=n_i=n$, and closed by equations of state for both the electrons and ions: $p_e=k_BnT_e$ and $p_i=k_BnT_i$
+      \end{itemize}
+    \end{block}
+    %single-pulse results
+    \begin{block}{Single-nanoflare Results}
+      \begin{itemize}
+        \item Single nanoflare is the most extreme low-frequency case, loop allowed to undergo complete heating and cooling cycle
+        \item In \citet[submitted]{barnes_inference_2016}, we investigated the effect of pulse duration ($\tau$), heat flux limiting, electron versus ion heating, and non-equilibrium ionization (NEI) on the resulting emission measure distribution, $\mathrm{EM}(T)$
+        \item We found that,
+        \begin{itemize}
+          \item While very short pulses ($\tau=20,40$ s) lead to significant emission above 10 MK, comparisons with field-aligned models show that EBTEL gives an artifically fast rise in density and thus an excess of hot emission for these very short heating times; longer pulses ($\tau=200,500$ s) show a cutoff near 10 MK.
+          \item Compared to pure Spitzer thermal conduction, heat flux limiting (using $f=1/6$) extends $\mathrm{EM}(T)$ to $>10$ MK; extreme values of $f$ (e.g. $f=1/30$) lead to significant emission $>20$ MK.
+          \item In the case in which the ions are heated, no emission is visible above 8 MK, independent of the pulse duration
+          \item Calculating $T_{eff}$ due to NEI shows that, even for very short pulses, there is little to no emission visible above 10 MK, for the single-fluid, electron heating, and ion heating cases
+        \end{itemize}
+        \item Conclusion: \alert{$\mathrm{EM}(T)$ signature of loop plasma heated by a single nanoflare is most likely found in the temperature range $T_m<T<10^7$ K}, where the temperature of maximum emission $T_m\approx4$ MK for active region cores \citep{warren_systematic_2012}
+      \end{itemize}
+      \begin{figure}
+        \subfigure[]{%
+        \includegraphics[width=0.49\columnwidth]{figures/single_pulse_Tn_profiles.eps}
+        \label{fig:single_Tn_profiles}}
+        \subfigure[]{%
+        \includegraphics[width=0.49\columnwidth]{figures/single_pulse_em_dist.eps}
+        \label{fig:single_em_dist}}
+        \caption{Equilibrium and non-equilibrium (red) ionization results for a single nanoflare lasting 20 s (blue) and 500 s (purple) in the single-fluid case (solid) as well as the case in which the only the elctrons (dashed) or only the ions (dot-dashed) are heated. Fig. \ref{fig:single_Tn_profiles} shows the electron temperature as a function of time for a 20 s pulse (left) and a 500 s pulse (right). Fig. \ref{fig:single_em_dist} shows the resulting $\mathrm{EM}(T)$ for the equilibrium (left, blue and right, purple) and NEI (red) cases.}
+      \end{figure}
+    \end{block}
+    %energy budget and heating stats
+    \begin{block}{Energy Budget and Heating Statistics}
+      \begin{columns}[T]
+      \begin{column}{0.49\columnwidth}
+        \begin{figure}
+          \includegraphics[width=\columnwidth]{figures/heating_functions.pdf}
+          \caption{Top (Middle) panel shows Uniform heating amplitudes for $t_N=1000$ ($t_N=5000$) s. Bottom panel shows Heating amplitudes drawn from a power-law distribution with  $\alpha=-1.5$ and mean wait time $t_N=2000$ s; the events shown in red (blue) have wait times that depend on the previous event energy (uniform wait times).}
+          \label{fig:heating_funcs}
+        \end{figure}
+      \end{column}
+      \begin{column}{0.49\columnwidth}
+        \begin{figure}
+          \centering
+          \include{parameter_space_graphic}
+          \caption{Heating function parameter space. We consider a range of waiting times $250<t_N<5000$ s, in increments of 250 s. In the power-law case, a sufficiently large number of runs, $N_R$ is required to sample the distribution. For example, when $t_N=5000$ s, $N_R=625$ such that for each $(\alpha,\beta,t_N=5000)$, we run the model 625 times.}
+          \label{fig:parameter_space}
+        \end{figure}
+      \end{column}
+      \end{columns}
+      \begin{itemize}
+        \item Loop of half-length $L=40$ Mm heated by $N$ triangular pulses with duration $\tau=200$ s over $t_{total}=8\times10^4$ s.
+        \item Each event has maximum heating rate $H_i$ and followed by a waiting time of $t_{N,i}$; static background heating $H_{bg}=3.5\times10^{-5}$ erg cm$^{-3}$ s$^{-1}$
+        \item $H_i$ can either be uniform such that $H_i=H_0$ for all $i$ or chosen from a power-law distribution with $\alpha=-1.5,-2.0,-2.5$
+        \item The total energy injected into the loop is constrained by
+          \begin{equation}
+            H_{eq} = \frac{1}{t_{total}}\sum_{i=1}^N\int_{t_i}^{t_i+\tau}\mathrm{d}t~Q(t) = \frac{\tau}{2t_{total}}\sum_{i=1}^NH_i,
+          \end{equation}
+        \item $H_{eq}\approx3.6\times10^{-3}$ erg cm$^{-3}$ s$^{-1}$ is the time-averaged heating rate such that $T_{peak}\approx4$ MK, consistent with AR core observations \citep{warren_systematic_2012}.
+        \item Treat $t_{N,i}$ as time needed for the field to ``unwind'', consistent with the \citet{parker_nanoflares_1988} nanoflare picture
+        \begin{itemize}
+          \item $\beta=0$: $t_{N,i}=t_N$ for all $i$, no dependence on $H_i$
+          \item $\beta=1$: $\varepsilon=LA\tau H_i/2\propto t_{N,i}$
+        \end{itemize}
+        \item Total number of events dependent on $t_N$, $N=t_{total}/(t_N + \tau)$ such that $N=16$ when $t_N=5000$ s
+        \item For the power-law cases, require $NN_R\sim1\times10^4$, where $N_R$ is the number of runs for each unique point in the parameter space, $(\alpha,\beta,t_N)$
+      \end{itemize}
     \end{block}
   \end{column}
-  %second column
+  %%
+  %%second column
   \begin{column}{0.49\linewidth}
-    %energy budget
-    \begin{block}{Energy Budget}
+    %em distribution
+    \begin{block}{Emission Measure Distribution}
+      \begin{figure}
+        \centering
+        \includegraphics[width=\columnwidth]{figures/em_grid_electron_a25.pdf}
+        \caption{Lorem ipsum}
+        \label{fig:electron_em}
+      \end{figure}
+      %
+      \begin{figure}
+        \centering
+        \includegraphics[width=\columnwidth]{figures/em_grid_ion_a25.pdf}
+        \caption{Lorem ipsum}
+        \label{fig:electron_em}
+      \end{figure}
     \end{block}
-    %heating statistics
-    \begin{block}{Heating Statistics}
+    %em ratio
+    \begin{block}{Hot Plasma Diagnostics}
+      \begin{figure}
+        \centering
+        \subfigure[]{%
+        \includegraphics[width=0.49\columnwidth]{figures/ratio_hist_alpha_electron_T2.pdf}
+        \label{fig:ratio_electron_alpha}}
+        \subfigure[]{%
+        \includegraphics[width=0.49\columnwidth]{figures/ratio_hist_twait_electron_T2.pdf}
+        \label{fig:ratio_electron_twait}}
+        \caption{Lorem ipsum}
+      \end{figure}
+      %
+      \begin{figure}
+        \centering
+        \subfigure[]{%
+        \includegraphics[width=0.49\columnwidth]{figures/ratio_hist_alpha_ion_T2.pdf}
+        \label{fig:ratio_ion_alpha}}
+        \subfigure[]{%
+        \includegraphics[width=0.49\columnwidth]{figures/ratio_hist_twait_ion_T2.pdf}
+        \label{fig:ratio_ion_twait}}
+        \caption{Lorem ipsum}
+      \end{figure}
     \end{block}
     %conclusions
     \begin{block}{Conclusions}
     \end{block}
     %references
     \begin{block}{References}
+      \scriptsize
+      \begin{multicols}{2}
+        \bibliographystyle{apj}
+        \bibliography{astrophys-abbrev.bib,references.bib}
+      \end{multicols}
+      This work was supported in part by the Big-Data Private-Cloud Research Cyberinfrastructure MRI-award funded by NSF under grant CNS-1338099 and by Rice University.
     \end{block}
   \end{column}
   \end{columns}

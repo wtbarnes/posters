@@ -1,0 +1,77 @@
+	\begin{tikzpicture}[node distance=3.75cm]
+		%Draw the nodes
+		\node (species) [ghost] {Heated Species $=\left\{
+		\begin{array}{l}
+			\mathrm{electron} \\
+			\mathrm{ion} \\
+			\mathrm{single}
+		\end{array}
+		\right.$};
+		\node (ghost_ph) [ghost, below of=species] {};
+		\node (alpha_pl) [ghost, left of=ghost_ph] {$\alpha=\left\{
+		\begin{array}{l}
+			-1.5 \\
+			-2.0 \\
+			-2.5
+		\end{array}
+		\right.$};
+		\node (alpha_uni) [ghost, right of=ghost_ph] {uniform};
+		\node (beta) [ghost, below of=alpha_pl]{$\beta=\left\{
+		\begin{array}{l}
+			0 \\
+			1
+		\end{array}
+		\right.$};
+		%wait time pl
+		\begin{scope}[node distance=1.8cm]
+		\node (tni_pl) [ghost, below of=beta]{$t_N=t_{N,i}$};
+		\node (ell1_pl) [ghost, left of=tni_pl]{$\ldots$};
+		\node (tn0_pl) [ghost, left of=ell1_pl]{$t_N=250$ s};
+		\node (ell2_pl) [ghost, right of=tni_pl]{$\ldots$};
+		\node (tn1_pl) [ghost, right of=ell2_pl]{$t_N=5000$ s};
+		%wait time uniform
+		\node (tni_uni) [ghost, below of=alpha_uni]{$t_N=t_{N,i}$};
+		\node (ell1_uni) [ghost, left of=tni_uni]{$\ldots$};
+		\node (tn0_uni) [ghost, left of=ell1_uni]{$t_N=250$ s};
+		\node (ell2_uni) [ghost, right of=tni_uni]{$\ldots$};
+		\node (tn1_uni) [ghost, right of=ell2_uni]{$t_N=5000$ s};
+		\end{scope}
+		%number of runs uniform
+		\node (nr0) [ghost, below of=tn0_pl]{$N_R=\left\{
+		\begin{array}{l}
+			1 \\
+			2 \\
+			\vdots \\
+			57
+		\end{array}
+		\right.$};
+		\node (nri) [ghost, below of=tni_pl]{$N_R=\left\{
+		\begin{array}{l}
+			1 \\
+			2 \\
+			\vdots \\
+			N_{R,i}
+		\end{array}
+		\right.$};
+		\node (nr1) [ghost, below of=tn1_pl]{$N_R=\left\{
+		\begin{array}{l}
+			1 \\
+			2 \\
+			\vdots \\
+			625
+		\end{array}
+		\right.$};
+		%Draw the arrows
+		\draw [arrow] (species) -- (alpha_pl);
+		\draw [arrow] (species) -- (alpha_uni);
+		\draw [arrow] (alpha_pl) -- (beta);
+		\draw [arrow] (beta) -- (tni_pl);
+		\draw [arrow] (beta) -- (tn0_pl);
+		\draw [arrow] (beta) -- (tn1_pl);
+		\draw [arrow] (tni_pl) -- (nri);
+		\draw [arrow] (tn0_pl) -- (nr0);
+		\draw [arrow] (tn1_pl) -- (nr1);
+		\draw [arrow] (alpha_uni) -- (tni_uni);
+		\draw [arrow] (alpha_uni) -- (tn0_uni);
+		\draw [arrow] (alpha_uni) -- (tn1_uni);
+	\end{tikzpicture}

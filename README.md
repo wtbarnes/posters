@@ -8,7 +8,7 @@ $ ./setup_themes.sh /path/to/my/texmf/
 ```
 This will create a set of symlinks in `/path/to/my/texmf/tex/latex/beamer/beamerposter` to the relevant themes and style file. To clean up the symlinks,
 ```Bash
-$ ./setup_themes.sh /path/to/my/texmf/
+$ ./setup_themes.sh /path/to/my/texmf/ clean
 ```
 
 ## Dependencies
