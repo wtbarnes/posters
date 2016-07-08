@@ -4,7 +4,6 @@
 		\begin{array}{l}
 			\mathrm{electron} \\
 			\mathrm{ion} \\
-			\mathrm{single}
 		\end{array}
 		\right.$};
 		\node (ghost_ph) [ghost, below of=species] {};
@@ -36,7 +35,8 @@
 		\node (ell2_uni) [ghost, right of=tni_uni]{$\ldots$};
 		\node (tn1_uni) [ghost, right of=ell2_uni]{$t_N=5000$ s};
 		\end{scope}
-		%number of runs uniform
+		%number of runs
+		\begin{scope}[node distance=3cm]
 		\node (nr0) [ghost, below of=tn0_pl]{$N_R=\left\{
 		\begin{array}{l}
 			1 \\
@@ -61,6 +61,7 @@
 			625
 		\end{array}
 		\right.$};
+		\end{scope}
 		%Draw the arrows
 		\draw [arrow] (species) -- (alpha_pl);
 		\draw [arrow] (species) -- (alpha_uni);

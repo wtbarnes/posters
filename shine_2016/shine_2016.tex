@@ -4,11 +4,11 @@
 \def\RightLogoPaddingTop{0.25cm}
 \def\RightLogoPaddingBottom{0.5cm}
 \def\RightLogo{/Users/willbarnes/Documents/Rice/Posters/posters/logos/RiceLogo_TMCMYK300DPI.jpg}
-\def\LeftLogoWidth{2.3}
+\def\LeftLogoWidth{2.5}
 \def\LeftLogoPaddingTop{1cm}
 \def\LeftLogoPaddingBottom{0.5cm}
 \def\LeftLogo{/Users/willbarnes/Documents/Rice/Posters/posters/logos/shine-logo.png}
-\def\GitHubLogoWidth{0.014\paperwidth}
+%\def\GitHubLogoWidth{0.014\paperwidth}
 %\def\GitHubLogo{/Users/willbarnes/Documents/Rice/Posters/posters/logos/GitHub-Mark-120px-plus.png}
 %\def\GitHubUser{wtbarnes}
 %set theme
@@ -68,7 +68,7 @@ School of Mathematics and Statistics, University of St. Andrews}
     \begin{itemize}
       \item Nanoflare model of \citet{parker_nanoflares_1988}: corona heated by impulsive ($\ll\tau_{cool}$), low-energy ($10^{24}$ erg) events produced by twisting, braiding of field lines rooted in the photosphere
       \item ``Smoking gun'' of nanoflare heating is the faint, high-temperature component of the emission measure distribution \citep{cargill_implications_1994,cargill_nanoflare_2004}
-      \item Fundamental question: what is the frequency of energy release in the solar corona? Two extreme cases:
+      \item Fundamental question: \alert{what is the frequency of energy release in the solar corona?} Two extreme cases:
       \begin{itemize}
         \item Low-frequency heating: Time between successive events is much greater than a typical loop cooling time (i.e. approaches the single pulse case)
         \item High-frequency heating: Time between successive events is much smaller than a typical loop cooling time (i.e. approaches the steady heating case)
@@ -87,7 +87,7 @@ School of Mathematics and Statistics, University of St. Andrews}
 		      \frac{d}{dt}\bar{p}_i &= -\frac{\gamma - 1}{L}\psi_{TR} + k_B\bar{n}\nu_{ei}(\bar{T}_e - \bar{T}_i) + (\gamma - 1)\bar{Q}_i,\label{eq:ebtel_pi}\\[0.5em]
 		      \frac{d}{dt}\bar{n} &= \frac{c_2(\gamma - 1)}{c_3\gamma Lk_B\bar{T}_e}\left(\psi_{TR} - F_{ce,0} - \mathcal{R}_{TR}\right),\label{eq:ebtel_n}
         \end{align}
-        where $\psi_{TR}$ is a term included to maintain charge and current neutrality and $\nu_{ei}$ is the electron-ion binary Coulomb collision frequency
+        where $c_1=\mathcal{R}_{TR}/\mathcal{R}_C$, $c_2=\bar{T}/T_a=0.9$, $c_3=T_0/T_a=0.6$, $\psi_{TR}$ is a term included to maintain charge and current neutrality and $\nu_{ei}$ is the electron-ion binary Coulomb collision frequency
         \item Assume quasi-neutrality, $n_e=n_i=n$, and closed by equations of state for both the electrons and ions: $p_e=k_BnT_e$ and $p_i=k_BnT_i$
       \end{itemize}
     \end{block}
@@ -98,13 +98,14 @@ School of Mathematics and Statistics, University of St. Andrews}
         \item In \citet[submitted]{barnes_inference_2016}, we investigated the effect of pulse duration ($\tau$), heat flux limiting, electron versus ion heating, and non-equilibrium ionization (NEI) on the resulting emission measure distribution, $\mathrm{EM}(T)$
         \item We found that,
         \begin{itemize}
-          \item While very short pulses ($\tau=20,40$ s) lead to significant emission above 10 MK, comparisons with field-aligned models show that EBTEL gives an artifically fast rise in density and thus an excess of hot emission for these very short heating times; longer pulses ($\tau=200,500$ s) show a cutoff near 10 MK.
+          \item While very short pulses ($\tau=20,40$ s) lead to significant emission above 10 MK, comparisons with field-aligned models \citep[e.g. HYDRAD,][]{bradshaw_influence_2013} show that EBTEL gives an artifically fast rise in density and thus an excess of hot emission for these very short heating times; longer pulses ($\tau=200,500$ s) show a cutoff near 10 MK.
           \item Compared to pure Spitzer thermal conduction, heat flux limiting (using $f=1/6$) extends $\mathrm{EM}(T)$ to $>10$ MK; extreme values of $f$ (e.g. $f=1/30$) lead to significant emission $>20$ MK.
           \item In the case in which the ions are heated, no emission is visible above 8 MK, independent of the pulse duration
           \item Calculating $T_{eff}$ due to NEI shows that, even for very short pulses, there is little to no emission visible above 10 MK, for the single-fluid, electron heating, and ion heating cases
         \end{itemize}
         \item Conclusion: \alert{$\mathrm{EM}(T)$ signature of loop plasma heated by a single nanoflare is most likely found in the temperature range $T_m<T<10^7$ K}, where the temperature of maximum emission $T_m\approx4$ MK for active region cores \citep{warren_systematic_2012}
       \end{itemize}
+      \vspace{-1ex}
       \begin{figure}
         \subfigure[]{%
         \includegraphics[width=0.49\columnwidth]{figures/single_pulse_Tn_profiles.eps}
@@ -114,11 +115,13 @@ School of Mathematics and Statistics, University of St. Andrews}
         \label{fig:single_em_dist}}
         \caption{Equilibrium and non-equilibrium (red) ionization results for a single nanoflare lasting 20 s (blue) and 500 s (purple) in the single-fluid case (solid) as well as the case in which the only the elctrons (dashed) or only the ions (dot-dashed) are heated. Fig. \ref{fig:single_Tn_profiles} shows the electron temperature as a function of time for a 20 s pulse (left) and a 500 s pulse (right). Fig. \ref{fig:single_em_dist} shows the resulting $\mathrm{EM}(T)$ for the equilibrium (left, blue and right, purple) and NEI (red) cases.}
       \end{figure}
+      \vspace{-2ex}
     \end{block}
     %energy budget and heating stats
     \begin{block}{Energy Budget and Heating Statistics}
       \begin{columns}[T]
       \begin{column}{0.49\columnwidth}
+        \vspace{-2ex}
         \begin{figure}
           \includegraphics[width=\columnwidth]{figures/heating_functions.pdf}
           \caption{Top (Middle) panel shows Uniform heating amplitudes for $t_N=1000$ ($t_N=5000$) s. Bottom panel shows Heating amplitudes drawn from a power-law distribution with  $\alpha=-1.5$ and mean wait time $t_N=2000$ s; the events shown in red (blue) have wait times that depend on the previous event energy (uniform wait times).}
@@ -126,12 +129,14 @@ School of Mathematics and Statistics, University of St. Andrews}
         \end{figure}
       \end{column}
       \begin{column}{0.49\columnwidth}
+        \vspace{-6ex}
         \begin{figure}
           \centering
           \include{parameter_space_graphic}
           \caption{Heating function parameter space. We consider a range of waiting times $250<t_N<5000$ s, in increments of 250 s. In the power-law case, a sufficiently large number of runs, $N_R$ is required to sample the distribution. For example, when $t_N=5000$ s, $N_R=625$ such that for each $(\alpha,\beta,t_N=5000)$, we run the model 625 times.}
           \label{fig:parameter_space}
         \end{figure}
+        \vspace{-2ex}
       \end{column}
       \end{columns}
       \begin{itemize}
@@ -146,7 +151,7 @@ School of Mathematics and Statistics, University of St. Andrews}
         \item Treat $t_{N,i}$ as time needed for the field to ``unwind'', consistent with the \citet{parker_nanoflares_1988} nanoflare picture
         \begin{itemize}
           \item $\beta=0$: $t_{N,i}=t_N$ for all $i$, no dependence on $H_i$
-          \item $\beta=1$: $\varepsilon=LA\tau H_i/2\propto t_{N,i}$
+          \item $\beta=1$: $\varepsilon=LA\tau H_i/2\propto t_{N,i}$ (see bottom panel of Fig. \ref{fig:heating_funcs})
         \end{itemize}
         \item Total number of events dependent on $t_N$, $N=t_{total}/(t_N + \tau)$ such that $N=16$ when $t_N=5000$ s
         \item For the power-law cases, require $NN_R\sim1\times10^4$, where $N_R$ is the number of runs for each unique point in the parameter space, $(\alpha,\beta,t_N)$
@@ -158,50 +163,68 @@ School of Mathematics and Statistics, University of St. Andrews}
   \begin{column}{0.49\linewidth}
     %em distribution
     \begin{block}{Emission Measure Distribution}
+      \vspace{-1ex}
+      \begin{itemize}
+        \item Compute solutions to Eqs. \ref{eq:ebtel_pe}, \ref{eq:ebtel_pi}, and \ref{eq:ebtel_n} for all $N_R$ runs for each point in the multidimensional heating parameter space. (Note: for the events of uniform magnitude, $N_R=1$)
+        \item To account for NEI, we use the numerical code described in \citet{bradshaw_numerical_2009} to calculate the fractional ionization states for Fe IX through Fe XXVII and calculate $T_{eff}$, a temperature that would be measured based on the actual ionization states
+        \item Given a temperature range $4\le\log{T_e}\le8.5$ with bin widths $\Delta\log{T_e}=0.01$, at each time $t_j$, add $n_j^2(2L)$ to every bin that falls in the range $[T_{0e,j},T_{ae,j}]$; time-averaging over the entire run gives $\mathrm{EM}(T)$
+        \item To calculate $\mathrm{EM}(T_{eff})$, we use the same procedure, but using $T_{eff}$ instead of $T_e$.
+      \end{itemize}
+      \vspace{-2ex}
       \begin{figure}
         \centering
+        \subfigure[Electron Heating]{%
         \includegraphics[width=\columnwidth]{figures/em_grid_electron_a25.pdf}
-        \caption{Lorem ipsum}
-        \label{fig:electron_em}
-      \end{figure}
-      %
-      \begin{figure}
-        \centering
+        \label{fig:electron_em}}
+        \subfigure[Ion Heating]{%
         \includegraphics[width=\columnwidth]{figures/em_grid_ion_a25.pdf}
-        \caption{Lorem ipsum}
-        \label{fig:electron_em}
+        \label{fig:electron_em}}
+        \caption{Emission measure distributions for waiting-times $t_N=250,750,1500,2500,3750,5000$ s in the electron heating case. The three types of heating functions shown are uniform heating rates (red), heating rates chosen from a power-law distribution of $\alpha=-2.5$ (blue), and heating rates chosen from a power-law distribution of $\alpha=-2.5$ where the time between successive events is proportional to the heating rate of the preceding event (green). The solid lines in the two power-law cases show the mean $\mathrm{EM}(T)$ over $N_R$ runs and the shading indicates $1\sigma$ from the mean. The dashed lines denote the corresponding $\mathrm{EM}(T_{eff})$ distribution. The standard deviation is not included in the NEI results.}
       \end{figure}
+      \vspace{-2ex}
     \end{block}
     %em ratio
     \begin{block}{Hot Plasma Diagnostics}
+      \vspace{-1ex}
+      \begin{itemize}
+        \item Well-known cool emission measure scaling $\mathrm{EM}(T)\propto T^a$;  similar scaling claimed for the hot part of the emission measure distribution, $\mathrm{EM}(T)\propto T^{-b}$ over a temperature range $T_m\lesssim T\lesssim10^{7.2}$
+        \item Observations have shown $7\lesssim b\lesssim10$ \citep{warren_systematic_2012} though measurements of $b$ are poorly constrained due to lack of spectroscopic data in this temperature range.
+        \item \citet{brosius_pervasive_2014} find the ratio of Fe XIX (formed at $T\approx10^{6.95}$ K) to Fe XII (formed at $T\approx10^{6.2}$ K) intensity to be $\sim0.59$ inside AR core compared to $\sim0.076$ outside, providing possible evidence for impulsive heating
+        \item As a proxy for this intensity ratio and an alternative to $b$,compute an emission measure ratio $\mathrm{EM}(T_{hot})/\mathrm{EM}(T_{cool})$, with $T_{hot}=10^{6.95}$ K and $T_{cool}=10^{6.3}\approx2\times10^6$ K
+      \end{itemize}
+      \vspace{-2ex}
       \begin{figure}
         \centering
-        \subfigure[]{%
+        \subfigure[Electron heating, grouped by $(\alpha,\beta)$]{%
         \includegraphics[width=0.49\columnwidth]{figures/ratio_hist_alpha_electron_T2.pdf}
         \label{fig:ratio_electron_alpha}}
-        \subfigure[]{%
+        \subfigure[Electron heating, grouped by $t_N$]{%
         \includegraphics[width=0.49\columnwidth]{figures/ratio_hist_twait_electron_T2.pdf}
         \label{fig:ratio_electron_twait}}
-        \caption{Lorem ipsum}
-      \end{figure}
-      %
-      \begin{figure}
-        \centering
-        \subfigure[]{%
+        \subfigure[Ion heating, grouped by $(\alpha,\beta)$]{%
         \includegraphics[width=0.49\columnwidth]{figures/ratio_hist_alpha_ion_T2.pdf}
         \label{fig:ratio_ion_alpha}}
-        \subfigure[]{%
+        \subfigure[Ion heating, grouped by $t_N$]{%
         \includegraphics[width=0.49\columnwidth]{figures/ratio_hist_twait_ion_T2.pdf}
         \label{fig:ratio_ion_twait}}
-        \caption{Lorem ipsum}
+        \caption{Histograms of emission measure ratios for the entire multidimensional heating parameter space (see Fig. \ref{fig:parameter_space}). Each histogram is normalized such that for each distribution $P(x)$, $\int^{\infty}_{-\infty}\mathrm{d}x\,P(x)=1$ and the bin widths are calculated using the well-known Freedman-Diaconis formula \citep{freedman_histogram_1981}. The top panels show the electron heating cases and the bottom panels show the ion heating cases. In the left panels, each histogram (denoted by linestyle and color) corresponds to a unique heating function $(\alpha,\beta)$. The uniform case has not been included here. In the right panels, the emission measure ratios are grouped by $t_N$. Here we show only five values of $t_N$ for aesthetic reasons.}
       \end{figure}
+      \vspace{-2ex}
     \end{block}
     %conclusions
     \begin{block}{Conclusions}
+      \begin{itemize}
+        \item While cool part of $\mathrm{EM}(T)$ more elongated for $\beta=1$, \alert{hot part of emission measure distribution independent of $\beta$}.
+        \item Compared to single-nanoflare results, ion heating results show $\mathrm{EM}(T)$ extending to hotter temperatures ($>10^7$ K) for intermediate to low heating frequencies
+        \item \alert{Effects due to NEI only important for uniform heating in electron heating case}, no visible differences in ion heating case
+        \item Emission measure ratio seems to be largely independent of $\alpha$, weakly dependent on $\beta$.
+        \item \alert{In ion heating case, lower $t_N$ required for consistency with \citet{brosius_pervasive_2014} results as compared to electron heating case}.
+      \end{itemize}
     \end{block}
     %references
     \begin{block}{References}
       \scriptsize
+      \vspace{-2ex}
       \begin{multicols}{2}
         \bibliographystyle{apj}
         \bibliography{astrophys-abbrev.bib,references.bib}
