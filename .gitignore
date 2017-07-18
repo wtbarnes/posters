@@ -18,7 +18,7 @@
 # these rules might exclude image files for figures etc.
 # *.ps
 # *.eps
-# *.pdf
+*/poster.pdf
 # only include these files if they are in a figure folder (can't seem to get this to work...)
 # !**/figures/*.eps
 # !**/figures/*.pdf
