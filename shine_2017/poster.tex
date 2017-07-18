@@ -1,30 +1,42 @@
 %adobe reader fix
 \pdfminorversion=4
+
 \documentclass[final]{beamer}
+
 %set image/logo options
+% Rice
 \def\RightLogoWidth{0.18}
 \def\RightLogoPaddingTop{0.25cm}
 \def\RightLogoPaddingBottom{0.5cm}
 \def\RightLogo{../logos/RiceLogo_TMCMYK300DPI.jpg}
+% SHINE
 \def\LeftLogoWidth{0.17}
 \def\LeftLogoPaddingTop{0.5cm}
 \def\LeftLogoPaddingBottom{0.5cm}
 \def\LeftLogo{../logos/shine-logo.png}
+% SunPy
 \def\AnotherLeftLogoWidth{0.06}
 \def\AnotherLeftLogoPaddingTop{0.25cm}
 \def\AnotherLeftLogoPaddingBottom{0.25cm}
 \def\AnotherLeftLogo{../logos/sunpy_powered_logo.png}
-%\def\TitleWidth{1. - \RightLogoWidth - \LeftLogoWidth - \AnotherLeftLogoWidth}
+% Title and author(s) block
 \def\TitleWidth{0.55}
+% GitHub
 \def\GitHubLogoWidth{0.014\paperwidth}
 \def\GitHubLogo{../logos/GitHub-Mark-120px-plus.png}
 \def\GitHubUser{wtbarnes}
+% Affiliation in footer
+\def\AffiliationFooter{Department of Physics and Astronomy - Rice University - Houston, TX USA}
+% Email
+\def\EmailAddressFooter{will.t.barnes@rice.edu}
+
 %set theme
 \mode<presentation>
 {
 \usetheme{I6dv_custom}
 }
 \setbeamertemplate{caption}[numbered]
+
 %Include packages
 \usepackage{soul,color,verbatim}
 \usepackage{type1cm}
@@ -42,8 +54,10 @@
 \usepackage{tikz}
 %setup beamerposter package
 \usepackage[orientation=portrait,size=custom,width=91.44,height=121.92,scale=1.0]{beamer/beamerposter/beamerposter}
+
 %tikz configuration
-%new commands go here
+
+%custom commands go here
 \newcommand{\ang}{\AA~} %alias angstrom
 \setbeamerfont{caption}{size=\footnotesize} %make caption size small
 
@@ -76,7 +90,8 @@
       \item \textbf{Goal:} \alert{Use hydrodynamic loop models to better understand how different heating properties}
     \end{itemize}
     \end{block}
-    %hydrodynamics
+    % forward modeling
+    %% Describe synthesizAR code, maybe a diagram?
     \begin{block}{Forward Modeling}
       \vspace{-1ex}
       \begin{itemize}
@@ -84,7 +99,8 @@
       \item Bar
       \end{itemize}
     \end{block}
-    %single-pulse results
+    % Heating model
+    %% Show tN distributions
     \begin{block}{Heating Model}
       \vspace{-1ex}
       \begin{itemize}
@@ -92,7 +108,8 @@
       \item Bar
       \end{itemize}
     \end{block}
-    %energy budget and heating stats
+    % Spectroscopic details/atomic physics
+    %% What lines are we modeling? 
     \begin{block}{Spectroscopic Details}
       \begin{columns}[T]
       \begin{column}{0.49\columnwidth}
@@ -112,11 +129,8 @@
       \item Bar
       \end{itemize}
     \end{block}
-  \end{column}
-  %%
-  %%second column
-  \begin{column}{0.49\linewidth}
-    %em distribution
+    % EM diagnostics
+    %% how to calculate true versus predicted EM
     \begin{block}{Emission Measure Diagnostics}
       \vspace{-1ex}
       \begin{itemize}
@@ -128,7 +142,13 @@
       \end{figure}
       \vspace{-2ex}
     \end{block}
-    %em ratio
+  \end{column}
+  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%second column
+  \begin{column}{0.49\linewidth}
+    % em distributions
+    %% maps of true versus predicted EM for a all tN and a few T bins
     \begin{block}{Emission Measure Distributions}
       \vspace{-1ex}
       \begin{itemize}
@@ -140,7 +160,8 @@
       \end{figure}
       \vspace{-2ex}
     \end{block}
-    %conclusions
+    % em slopes
+    %% maps of em slopes
     \begin{block}{Emission Measure Slopes}
       \vspace{-1ex}
       \begin{itemize}
@@ -149,7 +170,8 @@
       \end{itemize}
       \vspace{-1ex}
     \end{block}
-    %EM Slope Distributions
+    % em slope distributions
+    %% distribution of slopes plus overplotted results from literature
     \begin{block}{Slope Distributions}
     \end{block}
     %Conclusions
