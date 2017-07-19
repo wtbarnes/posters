@@ -117,45 +117,63 @@
     % Heating model
     %% Show tN distributions
     \begin{block}{Heating Model}
-      \vspace{-1ex}
-      \begin{itemize}
-      \item Foo
-      \item Bar
-      \end{itemize}
+      \begin{columns}[T]
+      \begin{column}{0.49\columnwidth}
+        \begin{itemize}
+        \item Each strand heated independently
+        \item Preferentially heat electrons
+        \item Triangual pulses with duration $\tau=200$ s
+        \item Total input energy per strand set by 
+              \begin{equation*}
+                E = \frac{(\epsilon B)^2}{8\pi}
+              \end{equation*}
+        \item $B$ is the average field strength per strand determined by the field extrapolation
+        \item Event energies chosen from a power-law distribution with $\alpha=-2.5$
+        \item $t_{N,i}\propto E_i$ such that larger events require a longer ``winding time''
+        \end{itemize}
+      \end{column}
+      \begin{column}{0.49\columnwidth}
+        \begin{figure}
+        \includegraphics[width=\columnwidth]{figures/wait_time_distributions.pdf}
+        \caption{Distribution of wait times for four different heating frequencies}
+        \label{fig:wait_times}
+        \end{figure}
+      \end{column}
+      \end{columns}
     \end{block}
     % Spectroscopic details/atomic physics
     %% What lines are we modeling? 
     \begin{block}{Spectroscopic Details}
       \begin{columns}[T]
-      \begin{column}{0.49\columnwidth}
-        \vspace{-2ex}
-        \begin{figure}
-        \end{figure}
-      \end{column}
-      \begin{column}{0.49\columnwidth}
-        \vspace{-6ex}
-        \begin{figure}
-        \end{figure}
-        \vspace{-2ex}
-      \end{column}
+        \begin{column}{0.49\columnwidth}
+          \begin{figure}
+            \includegraphics[width=\columnwidth]{figures/contribution_functions.pdf}    
+          \end{figure}
+        \end{column}
+        \begin{column}{0.49\columnwidth}
+        \input{ion_table.tex}
+        \end{column}
       \end{columns}
-      \begin{itemize}
-      \item Foo
-      \item Bar
-      \end{itemize}
     \end{block}
     % EM diagnostics
     %% how to calculate true versus predicted EM
     \begin{block}{Emission Measure Diagnostics}
-      \vspace{-1ex}
       \begin{itemize}
-      \item Foo
-      \item Bar
+        \item \textit{True} emission measure from simulated thermodynamic quantities,
+              \begin{equation*}
+                \mathrm{EM}(T) = \int_{\mathrm{LOS}}\mathrm{d}h\,n^2(h,T)
+              \end{equation*} 
+        \item Bin in temperature $5.6<\log{T}<7.0$ with width $\Delta\log{T}=0.05$
+        \item \textit{Predicted} EM from regularized inversion code of \citet{hannah_differential_2012}
+        \begin{itemize}
+          \item Assume 25\% uncertainty on our intensities to balance acceptable $\chi^2$ and smoothness
+        \end{itemize}
+        \item Fit power-law to cool side such that $\mathrm{EM}\sim T^a$
+        \begin{itemize}
+          \item Fit between 1 MK and $T_{peak}$ (4 MK true, 3 MK predicted), where $\mathrm{EM}_{max}=\mathrm{EM}(T_{peak})$
+          \item Only fit to pixels where $\mathrm{EM}(T)>10^{25}\,\,\mathrm{cm}^{-5}$ and acceptable fit $R^2>0.95$
+        \end{itemize}
       \end{itemize}
-      \vspace{-2ex}
-      \begin{figure}
-      \end{figure}
-      \vspace{-2ex}
     \end{block}
   \end{column}
   %%
@@ -165,20 +183,14 @@
     % em distributions
     %% maps of true versus predicted EM for a all tN and a few T bins
     \begin{block}{Emission Measure Distributions}
-      \vspace{-1ex}
       \begin{itemize}
       \item Foo
       \item Bar
       \end{itemize}
-      \vspace{-2ex}
-      \begin{figure}
-      \end{figure}
-      \vspace{-2ex}
     \end{block}
     % em slopes
     %% maps of em slopes
     \begin{block}{Emission Measure Slopes}
-      \vspace{-1ex}
       \begin{itemize}
       \item Foo
       \item Bar
@@ -191,13 +203,11 @@
     \end{block}
     %Conclusions
     \begin{block}{Conclusions}
-      \vspace{-1ex}
       \begin{itemize}
       \item Some
       \item conclusions
       \item here
       \end{itemize}
-      \vspace{-1ex}
     \end{block}
     %references
     \begin{block}{References}
