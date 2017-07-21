@@ -18,3 +18,12 @@ $ ./setup_themes.sh /path/to/my/texmf/ clean
 * [beamer](http://www.ctan.org/pkg/beamer) (bundled with TeXLive)
 * [natbib](https://www.ctan.org/pkg/natbib?lang=en) (bundled with TeXLive)
 * [latex-beamerposter](https://github.com/deselaers/latex-beamerposter), and associated dependencies (included as a submodule in this repository)
+
+## Tips for Printing on the Rice U Plotters
+
+* Open up PDF in Preview on one of the Macs in the Mudd building
+* Print to one of the least-busy, non-glossy plotters (`plotter[1-6]`)
+* For 36 in. by 48 in. (suggested for most US-based conferences), choose the "Arch E" size option
+  * There are a couple of different suboptions here, not clear which one is the best to choose
+  * For my SHINE 2017 poster, I used the "oversize" option and it cut off a significant portion of the right margin
+  * Maybe just best to stick with the normal "Arch E" option?
