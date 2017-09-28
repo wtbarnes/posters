@@ -5,25 +5,6 @@
 ## Abstract
 (see [ABSTRACT.md file](ABSTRACT.md))
 
-## Outline
-What do we want to include in the poster?
-1. Introduction
-  1. Coronal heating problem
-  2. Challenges and general approach
-2. Methods
-  1. Loop Hydrodynamics
-  2. Forward Modeling
-  3. synthesizAR package--data-driven simulations
-3. Forward-modeled AIA Images
-  1. Show all six channels
-  2. Temperature response functions
-  3. Lightcurves
-4. Timelag Method
-5. Distributed Computing and Big Data Challenges
-  1. Dask--show some dashboard snapshots
-  2. General use in package
-  3. Distributed computation of timelags
-
 ## Keywords
 * sun
 * corona
@@ -31,3 +12,28 @@ What do we want to include in the poster?
 * big data
 * parallel computing
 * cross-correlation
+
+## Guidelines
+* Poster no larger than 4 ft. by 4 ft. 
+* Must be hung up between 8 am and noon on 9 October
+* Formal poster session 4:00 pm-5:30 pm, 10 October 
+* Must be taken down by 6:00 pm, 10 October
+
+## Outline
+1. Introduction
+    * Coronal heating problem
+    * Challenges and general approach
+2. Methods
+    * Loop Hydrodynamics
+    * Forward Modeling
+    * synthesizAR package--data-driven simulations
+3. Forward-modeled AIA Images
+    * Show all six channels
+    * Temperature response functions
+    * Lightcurves
+4. Timelag Method
+5. Distributed Computing and Big Data Challenges
+    * Dask--show some dashboard snapshots
+    * General use in package
+    * Distributed computation of timelags
+
