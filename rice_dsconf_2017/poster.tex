@@ -1,0 +1,203 @@
+%adobe reader fix
+\pdfminorversion=4
+
+\documentclass[final]{beamer}
+
+%set image/logo options
+% Rice
+\def\RightLogoWidth{0.18}
+\def\RightLogoPaddingTop{0.25cm}
+\def\RightLogoPaddingBottom{0.5cm}
+\def\RightLogo{../logos/RiceLogo_TMCMYK300DPI.jpg}
+% SunPy
+\def\LeftLogoWidth{0.06}
+\def\LeftLogoPaddingTop{0.25cm}
+\def\LeftLogoPaddingBottom{0.25cm}
+\def\LeftLogo{../logos/sunpy_powered_logo.png}
+% Title and author(s) block
+\def\TitleWidth{0.7}
+% GitHub
+\def\GitHubLogoWidth{0.014\paperwidth}
+\def\GitHubLogo{../logos/GitHub-Mark-120px-plus.png}
+\def\GitHubUser{wtbarnes}
+% Affiliation in footer
+\def\AffiliationFooter{Department of Physics and Astronomy - Rice University - Houston, TX USA}
+% Email
+\def\EmailAddressFooter{will.t.barnes@rice.edu}
+
+%set theme
+\mode<presentation>
+{
+\usetheme{I6dv_custom}
+}
+\setbeamertemplate{caption}[numbered]
+
+%Include packages
+\usepackage{soul,color,verbatim}
+\usepackage{type1cm}
+\usepackage{calc}
+%\usepackage{times,mathptmx}
+\usepackage{amsmath,amsthm,amssymb,latexsym}
+\usepackage{empheq}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage[numbers]{natbib}
+\usepackage{multicol}
+\usepackage{subfigure}
+\usepackage[english]{babel}
+%\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+%setup beamerposter package
+\usepackage[orientation=portrait,size=custom,width=91.44,height=121.92,scale=1.0]{beamer/beamerposter/beamerposter}
+
+%tikz configuration
+
+%custom commands go here
+\newcommand{\ang}{\AA~} %alias angstrom
+\setbeamerfont{caption}{size=\footnotesize} %make caption size small
+
+%Set author and title
+\title[AR Timelag Analysis]{Timelag Analysis of Global Hydrodynamic Simulations of Active Regions in the Solar Corona}
+\author[Barnes \& Bradshaw]{Will T. Barnes \& Stephen J. Bradshaw}
+\institute[Rice University]{Department of Physics and Astronomy, Rice University\\
+                            Rice Data Science Conference, 9-10 October 2017}
+\date{9-10 October, 2017}
+
+%start poster
+%everything goes in one frame
+\begin{document}
+\begin{frame}
+  %start columns environment to slice up the page horizontally
+  \begin{columns}[T]
+  \hfill
+  %%
+  %%first column
+  \begin{column}{0.49\linewidth}
+    %
+    %introduction
+    \begin{block}{The Coronal Heating Problem}
+    \begin{itemize}
+      \item Fundamental question: \alert{what is the frequency of energy release in the cores of active regions (ARs)?}
+      \item Define heating frequency in terms of $t_N$, the time between successive heating events on a \textit{single strand}, and $\tau_{cool}$, a typical loop cooling time,
+      \begin{itemize}
+        \item Low-frequency heating: $t_N>\tau_{cool}$ (i.e. approaches single nanoflare case), 
+        \item High-frequency heating: $t_N<\tau_{cool}$ (i.e. approaches steady heating case), 
+      \end{itemize}
+      \item Using a robust forward modeling framework and emission measure diagnostics, we address two primary questions:
+      \begin{enumerate}
+        \item \alert{What are the observational signatures of nanoflares of varying frequency?}
+        \item \alert{Can these signatures be observed and be used to constrain the heating frequency in AR cores?}
+      \end{enumerate}
+    \end{itemize}
+    \end{block}
+    %
+    %% loop hydrodynamics
+    %% Talk about hydro models
+    \begin{block}{Loop Hydrodynamics}
+    \begin{itemize}
+        \item Loop hydro discussion
+        \item Governing equations
+        \item Sample curves
+    \end{itemize}
+    \end{block}
+    %
+    % forward modeling
+    %% Describe synthesizAR code, maybe a diagram?
+    \begin{block}{Forward Modeling Emission from Active Region Cores}
+        % forward modeling details here
+        % show HMI map with lines
+        % equation for intensity calculation
+        % discuss steps
+    \end{block}
+    %
+    % Heating model
+    %% Explain heating models, energy distribution
+    \begin{block}{Heating Models}
+      \begin{columns}[T]
+      \begin{column}{0.49\columnwidth}
+        \begin{itemize}
+        \item Nanoflare model of \citet{parker_nanoflares_1988}: corona heated by impulsive ($\ll\tau_{cool}$), low-energy ($\sim10^{24}$ erg) events produced by twisting, braiding of field lines
+        \item Each strand heated independently by repeating triangular pulses of duration $\tau=200$ s; preferentially heat electrons 
+        \item Use extrapolated field strength to estimate total energy input per strand as,
+          \begin{equation*}
+            E = (\epsilon B)^2/8\pi
+          \end{equation*}
+        \item $\epsilon=0.1$ is the stressing coefficient and $B$ is the average field strength per strand
+        \item Event energies chosen from a power-law distribution with $\alpha=-2.5$ such that total energy constrained as above
+        \item Choose four different average waiting times $\langle t_N\rangle=250,\,750,\,2500,\,5000$ s 
+        \begin{itemize}
+          \item Range from high-frequency heating (250 s) to low-frequency heating (5000 s)
+          \item $t_{N,i}\propto E_i$ such that larger events require a longer ``winding time'', consistent with Parker nanoflare picture \citep[e.g.][]{cargill_active_2014,barnes_inference_2016-1}
+        \end{itemize}
+        \end{itemize}
+      \end{column}
+      \begin{column}{0.49\columnwidth}
+        \begin{figure}
+        %\includegraphics[width=\columnwidth]{}
+        \caption{Energy distribution} 
+        \label{fig:wait_times}
+        \end{figure}
+      \end{column}
+      \end{columns}
+    \end{block}
+    %
+  \end{column}
+  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%second column
+  \begin{column}{0.49\linewidth}
+    %
+    % AIA intensity
+    %% AIA intensity maps for a given heating model 
+    \begin{block}{Synthesizing AIA Intensities}
+      \begin{figure}
+        %\includegraphics[width=\columnwidth]{}
+        \caption{AIA intensities} 
+        \label{fig:total_em_map}
+      \end{figure}
+    \end{block}
+    %
+    % 1d em distributions
+    \begin{block}{Cross-correlation of Channel Pairs}
+        % describe cross-correlation and timelag calculation
+        % equations
+        % 1D lightcurves plus correlations for cooling only
+        % Dask dag for calculation + dashboard (?)
+      \begin{figure}
+        %\includegraphics[width=\columnwidth]{}
+        \caption{caption goes here}
+        \label{fig:em_1d}
+      \end{figure}
+    \end{block}
+    %
+    % timelag maps
+    %% maps of maximum timelags
+    \begin{block}{Timelag Maps}
+      \begin{figure}
+        %\includegraphics[width=\columnwidth]{}
+        \caption{Timelag maps}
+        \label{fig:em_slope_maps}
+      \end{figure}
+    \end{block}
+    %
+    %Conclusions
+    \begin{block}{Conclusions}
+      \begin{itemize}
+        \item some Conclusions
+        \item about the timelag results
+        \item can go here
+      \end{itemize}
+    \end{block}
+    %
+    %references
+    \begin{block}{References}
+      \scriptsize
+      \begin{multicols}{2}
+        \bibliographystyle{../apj.bst}
+        \bibliography{references.bib}
+      \end{multicols}
+    \end{block}
+  \end{column}
+  \end{columns}
+\end{frame}
+\end{document}
