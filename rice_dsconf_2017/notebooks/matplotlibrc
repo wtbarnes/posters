@@ -1,0 +1,24 @@
+axes.titlesize : 16
+axes.labelsize : 16
+#Lines
+lines.linewidth : 2
+#Ticks
+xtick.labelsize : 10
+ytick.labelsize : 10
+xtick.major.pad : 8
+xtick.minor.pad : 8
+ytick.major.pad : 8
+ytick.minor.pad : 8
+#Legend
+legend.fontsize : 12
+#Save
+#savefig.dpi : 500
+savefig.format : pdf
+savefig.bbox : tight
+#Fonts
+font.family        : sans-serif
+font.serif         : Times, Palatino, New Century Schoolbook, Bookman, Computer Modern Roman
+font.sans-serif    : Helvetica, Avant Garde, Computer Modern Sans serif
+font.cursive       : Zapf Chancery
+font.monospace     : Courier, Computer Modern Typewriter
+text.usetex        : true
