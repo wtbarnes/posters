@@ -1,4 +1,22 @@
 
+@article{cargill_enthalpy-based_2012,
+  title = {Enthalpy-Based {{Thermal Evolution}} of {{Loops}}. {{II}}. {{Improvements}} to the {{Model}}},
+  volume = {752},
+  issn = {0004-637X},
+  doi = {10.1088/0004-637X/752/2/161},
+  abstract = {This paper develops the zero-dimensional (0D) hydrodynamic coronal loop model "Enthalpy-based Thermal Evolution of Loops" (EBTEL) proposed by Klimchuk et al., which studies the plasma response to evolving coronal heating, especially impulsive heating events. The basis of EBTEL is the modeling of mass exchange between the corona and transition region (TR) and chromosphere in response to heating variations, with the key parameter being the ratio of the TR to coronal radiation. We develop new models for this parameter that now include gravitational stratification and a physically motivated approach to radiative cooling. A number of examples are presented, including nanoflares in short and long loops, and a small flare. The new features in EBTEL are important for accurate tracking of, in particular, the density. The 0D results are compared to a 1D hydro code (Hydrad) with generally good agreement. EBTEL is suitable for general use as a tool for (1) quick-look results of loop evolution in response to a given heating function, (2) extensive parameter surveys, and (3) situations where the modeling of hundreds or thousands of elemental loops is needed. A single run takes a few seconds on a contemporary laptop.},
+  timestamp = {2014-02-24T19:48:29Z},
+  urldate = {2014-02-24},
+  journal = {The Astrophysical Journal},
+  author = {Cargill, P. J. and Bradshaw, S. J. and Klimchuk, J. A.},
+  month = jun,
+  year = {2012},
+  keywords = {Sun: activity,SUN: CORONA,Sun: corona,Sun: flares,Sun: transition region},
+  pages = {161},
+  file = {NASA/ADS Full Text PDF:/Users/willbarnes/Library/Application Support/Zotero/Profiles/w8h0ram3.default/zotero/storage/3P4U6BSS/Cargill et al. - 2012 - Enthalpy-based Thermal Evolution of Loops. II. Imp.pdf:application/pdf},
+  groups = {EBTEL,EBTEL}
+}
+
 @article{barnes_inference_2016,
   title = {Inference of {{Heating Properties}} from "{{Hot}}" {{Non}}-Flaring {{Plasmas}} in {{Active Region Cores}}. {{I}}. {{Single Nanoflares}}},
   volume = {829},
@@ -28,6 +46,43 @@ of the actual heating may be detectable in some instances.},
   pages = {31},
   file = {Barnes_et_al_2016.pdf:/Users/willbarnes/Google Drive/School/Papers/Barnes_et_al_2016_2.pdf:application/pdf},
   groups = {My Publications,SHINE 2017,SHINE 2017}
+}
+
+@article{astropy_collaboration_astropy:_2013,
+  title = {Astropy: {{A}} Community {{Python}} Package for Astronomy},
+  volume = {558},
+  issn = {0004-6361},
+  shorttitle = {Astropy},
+  doi = {10.1051/0004-6361/201322068},
+  abstract = {We present the first public version (v0.2) of the open-source and community-developed Python package, Astropy. This package provides core astronomy-related functionality to the community, including support for domain-specific file formats such as flexible image transport system (FITS) files, Virtual Observatory (VO) tables, and common ASCII table formats, unit and physical quantity conversions, physical constants specific to astronomy, celestial coordinate and time transformations, world coordinate system (WCS) support, generalized containers for representing gridded as well as tabular data, and a framework for cosmological transformations and conversions. Significant functionality is under activedevelopment, such as a model fitting framework, VO client and server tools, and aperture and point spread function (PSF)
+photometry tools. The core development team is actively making additions and enhancements to the current code base, and we encourage anyone interested to participate in the development of future Astropy versions.},
+  timestamp = {2017-01-27T18:51:23Z},
+  urldate = {2017-01-27},
+  journal = {Astronomy and Astrophysics},
+  author = {{Astropy Collaboration} and Robitaille, Thomas P. and Tollerud, Erik J. and Greenfield, Perry and Droettboom, Michael and Bray, Erik and Aldcroft, Tom and Davis, Matt and Ginsburg, Adam and Price-Whelan, Adrian M. and Kerzendorf, Wolfgang E. and Conley, Alexander and Crighton, Neil and Barbary, Kyle and Muna, Demitri and Ferguson, Henry and Grollier, Fr{\'e}d{\'e}ric and Parikh, Madhura M. and Nair, Prasanth H. and Unther, Hans M. and Deil, Christoph and Woillez, Julien and Conseil, Simon and Kramer, Roban and Turner, James E. H. and Singer, Leo and Fox, Ryan and Weaver, Benjamin A. and Zabalza, Victor and Edwards, Zachary I. and Azalee Bostroem, K. and Burke, D. J. and Casey, Andrew R. and Crawford, Steven M. and Dencheva, Nadia and Ely, Justin and Jenness, Tim and Labrie, Kathleen and Lim, Pey Lian and Pierfederici, Francesco and Pontzen, Andrew and Ptak, Andy and Refsdal, Brian and Servillat, Mathieu and Streicher, Ole},
+  month = oct,
+  year = {2013},
+  keywords = {methods: data analysis,methods: miscellaneous,virtual observatory tools},
+  pages = {A33},
+  file = {Astropy_Collaboration_et_al_2013.pdf:/Users/willbarnes/Google Drive/School/Papers/Astropy_Collaboration_et_al_2013.pdf:application/pdf},
+  groups = {SciPy Proceedings 2017,SciPy Proceedings 2017,SHINE 2017,SHINE 2017,Software}
+}
+
+@article{klimchuk_highly_2008,
+  title = {Highly {{Efficient Modeling}} of {{Dynamic Coronal Loops}}},
+  volume = {682},
+  issn = {0004-637X},
+  doi = {10.1086/589426},
+  abstract = {Observational and theoretical evidence suggests that coronal heating is impulsive and occurs on very small cross-field spatial scales. A single coronal loop could contain a hundred or more individual strands that are heated quasi-independently by nanoflares. It is therefore an enormous undertaking to model an entire active region or the global corona. Three-dimensional MHD codes have inadequate spatial resolution, and one-dimensional (1D) hydrodynamic codes are too slow to simulate the many thousands of elemental strands that must be treated in a reasonable representation. Fortunately, thermal conduction and flows tend to smooth out plasma gradients along the magnetic field, so zero-dimensional (0D) models are an acceptable alternative. We have developed a highly efficient model called ``enthalpy-based thermal evolution of loops'' (EBTEL), which accurately describes the evolution of the average temperature, pressure, and density along a coronal strand. It improves significantly on earlier models of this type-in accuracy, flexibility, and capability. It treats both slowly varying and highly impulsive coronal heating; it provides the time-dependent differential emission measure distribution, DEM(T), at the transition region footpoints; and there are options for heat flux saturation and nonthermal electron beam heating. EBTEL gives excellent agreement with far more sophisticated 1D hydrodynamic simulations despite using 4 orders of magnitude less computing time. It promises to be a powerful new tool for solar and stellar studies.},
+  timestamp = {2014-02-24T19:33:19Z},
+  urldate = {2014-02-24},
+  journal = {The Astrophysical Journal},
+  author = {Klimchuk, J. A. and Patsourakos, S. and Cargill, P. J.},
+  month = aug,
+  year = {2008},
+  keywords = {hydrodynamics,Methods: Numerical,Stars: Coronae,SUN: CORONA,Sun: corona,Sun: transition region},
+  pages = {1351--1362},
+  groups = {EBTEL,EBTEL}
 }
 
 @article{viall_evidence_2012,
@@ -105,6 +160,38 @@ that nanoflare energies may be smaller than previously envisioned.},
   groups = {SHINE 2017,SHINE 2017}
 }
 
+@article{cargill_enthalpy-based_2012-1,
+  title = {Enthalpy-Based {{Thermal Evolution}} of {{Loops}}. {{III}}. {{Comparison}} of {{Zero}}-Dimensional {{Models}}},
+  volume = {758},
+  issn = {0004-637X},
+  doi = {10.1088/0004-637X/758/1/5},
+  abstract = {Zero-dimensional (0D) hydrodynamic models provide a simple and quick way 
+to study the thermal evolution of coronal loops subjected to
+time-dependent heating. This paper presents a comparison of a number of
+0D models that have been published in the past and is intended to
+provide a guide for those interested in either using the old models or
+developing new ones. The principal difference between the models is the
+way the exchange of mass and energy between corona, transition region,
+and chromosphere is treated, as plasma cycles into and out of a loop
+during a heating-cooling cycle. It is shown that models based on the
+principles of mass and energy conservation can give satisfactory results
+at some or, in the case of the Enthalpy-based Thermal Evolution of Loops
+model, all stages of the loop evolution. Empirical models can have
+significant difficulties in obtaining accurate behavior due to
+invocation of assumptions incompatible with the correct exchange of mass
+and energy between corona, transition region, and chromosphere.},
+  timestamp = {2014-02-24T19:49:13Z},
+  urldate = {2014-02-24},
+  journal = {The Astrophysical Journal},
+  author = {Cargill, P. J. and Bradshaw, S. J. and Klimchuk, J. A.},
+  month = oct,
+  year = {2012},
+  keywords = {SUN: CORONA,Sun: corona,Sun: transition region},
+  pages = {5},
+  file = {NASA/ADS Full Text PDF:/Users/willbarnes/Library/Application Support/Zotero/Profiles/w8h0ram3.default/zotero/storage/ATAA4Q4Q/Cargill et al. - 2012 - Enthalpy-based Thermal Evolution of Loops. III. Co.pdf:application/pdf},
+  groups = {EBTEL,EBTEL}
+}
+
 @article{parker_nanoflares_1988,
   title = {Nanoflares and the Solar {{X}}-Ray Corona},
   volume = {330},
@@ -121,6 +208,24 @@ understood as a swarm of nanoflares. This interpretation suggests that the X-ray
   keywords = {High Temperature Gases,Lines Of Force,PHOTOSPHERE,Solar corona,Solar Flares,SOLAR MAGNETIC FIELD,SOLAR X-RAYS,Spatial Resolution,Steady State,Ultraviolet Radiation},
   pages = {474--479},
   groups = {SHINE 2017,SHINE 2017,Solar Physics}
+}
+
+@article{sunpy_community_sunpypython_2015,
+  title = {{{SunPy}}\textemdash{}{{Python}} for Solar Physics},
+  volume = {8},
+  doi = {10.1088/1749-4699/8/1/014009},
+  abstract = {This paper presents SunPy (version 0.5), a community-developed Python package for solar physics. Python, a free, cross-platform,
+general-purpose, high-level programming language, has seen widespread adoption among the scientific community, resulting in the availability of a large number of software packages, from numerical computation (NumPy, SciPy) and machine learning (scikit-learn) to visualization and plotting (matplotlib). SunPy is a data-analysis environment specializing in providing the software necessary to analyse solar and heliospheric data in Python. SunPy is open-source software (BSD licence) and has an open and transparent development workflow that anyone can contribute to. SunPy provides access to solar data through integration with the Virtual Solar Observatory (VSO), the Heliophysics Event Knowledgebase (HEK), and the HELiophysics Integrated Observatory (HELIO) webservices. It
+currently supports image data from major solar missions (e.g., SDO, SOHO, STEREO, and IRIS), time-series data from missions such as GOES, SDO/EVE, and PROBA2/LYRA, and radio spectra from e-Callisto and
+STEREO/SWAVES. We describe SunPy's functionality, provide examples of solar data analysis in SunPy, and show how Python-based solar data-analysis can leverage the many existing tools already available in Python. We discuss the future goals of the project and encourage interested users to become involved in the planning and development of SunPy.},
+  timestamp = {2017-01-27T18:47:53Z},
+  urldate = {2017-01-27},
+  journal = {Computational Science and Discovery},
+  author = {{SunPy Community} and Mumford, Stuart J. and Christe, Steven and P{\'e}rez-Su{\'a}rez, David and Ireland, Jack and Shih, Albert Y. and Inglis, Andrew R. and Liedtke, Simon and Hewett, Russell J. and Mayer, Florian and Hughitt, Keith and Freij, Nabil and Meszaros, Tomas and Bennett, Samuel M. and Malocha, Michael and Evans, John and Agrawal, Ankit and Leonard, Andrew J. and Robitaille, Thomas P. and Mampaey, Benjamin and Campos-Rozo, Jose Iv{\'a}n and Kirk, Michael S.},
+  month = jan,
+  year = {2015},
+  pages = {014009},
+  groups = {SciPy Proceedings 2017,SciPy Proceedings 2017,SHINE 2017,SHINE 2017,Software}
 }
 
 @article{viall_survey_2017,
@@ -174,6 +279,14 @@ presence of ``hot'' plasma.},
   pages = {217},
   file = {Barnes_et_al_2016.pdf:/Users/willbarnes/Google Drive/School/Papers/Barnes_et_al_2016_3.pdf:application/pdf},
   groups = {My Publications,SHINE 2017,SHINE 2017}
+}
+
+@misc{dask_development_team_dask:_2016,
+  title = {Dask: {{Library}} for Dynamic Task Scheduling},
+  timestamp = {2017-10-06T21:14:13Z},
+  author = {{Dask Development Team}},
+  year = {2016},
+  groups = {Software}
 }
 
 
