@@ -79,17 +79,11 @@
     %introduction
     \begin{block}{The Coronal Heating Problem}
         \begin{itemize}
-        \item Fundamental question: \alert{what is the frequency of energy release in the cores of active regions (ARs)?}
-        \item Define heating frequency in terms of $t_N$, the time between successive heating events on a \textit{single strand}, and $\tau_{cool}$, a typical loop cooling time,
-        \begin{itemize}
-            \item Low-frequency heating: $t_N>\tau_{cool}$ (i.e. approaches single nanoflare case), 
-            \item High-frequency heating: $t_N<\tau_{cool}$ (i.e. approaches steady heating case), 
-        \end{itemize}
-        \item Using a robust forward modeling framework and emission measure diagnostics, we address two primary questions:
-        \begin{enumerate}
-            \item \alert{What are the observational signatures of nanoflares of varying frequency?}
-            \item \alert{Can these signatures be observed and be used to constrain the heating frequency in AR cores?}
-        \end{enumerate}
+            \item Longstanding problem in solar astrophysics: \alert{what heats the corona, the outermost layer of the solar atmosphere, to temperatures in excess of $10^6$ K while the solar surface is only $\approx6\times10^3$ K?}
+            \item Energy stored in the complex coronal magnetic field, but how does it make it to the plasma?
+            \item Wealth of high-quality, but extremely complex remote-sensing data in solar physics, e.g. Atmospheric Imaging Assembly (AIA) on the Solar Dynamics Observatory (SDO) produces over 1 TB of data per day in six different wavelength passbands at 0.6 arcsec-per-pixel resolution and a 10 s cadence \citep{lemen_atmospheric_2012}
+            \item \alert{Goal:} Forward model (i.e. produce synthetic data products from simulation) AIA intensity maps of active regions, areas of intense magnetic activity, for a range of heating parameters and compare with observations to assess the viability of different heating models
+            \item Time delays between AIA channels provide potential \alert{observable} for making detailed comparisons with observations
         \end{itemize}
         \begin{figure}
             \centering
@@ -97,7 +91,7 @@
                 \column{0.7\columnwidth}
                 \includegraphics[width=\columnwidth]{figures/fulldisk_plus_zoom_171.pdf}
                 \column{0.29\columnwidth}
-                \caption{\textbf{Left:} The full solar disk as imaged by the Atmospheric Imaging Assembly (AIA) instrument on the Solar Dynamics Observatory (SDO) on 12 February 2011 15:30:37 UTC. Shown here is the 171 \ang EUV channel which images plasma around 1 MK. \textbf{Right:} A zoomed-in view of active region (AR) NOAA 1158. Note the clearly visible loop structures where the plasma is confined along the strong magnetic field and the roughly dipole-like structure. ARs are areas of intense magnetic activity where coronal plasma can be heated in excess of 10 MK.}
+                \caption{\textbf{Left:} The full solar disk imaged by SDO/AIA on 12 February 2011 15:30:37 UTC. Shown here is the 171 \ang EUV channel which images plasma around 1 MK. \textbf{Right:} A zoomed-in view of active region (AR) NOAA 1158. Note the clearly visible loop structures where the plasma is confined along the strong magnetic field and the roughly dipole-like structure. ARs are areas of intense magnetic activity where coronal plasma can be heated in excess of 10 MK.}
             \end{columns}
         \end{figure}
     \end{block}
@@ -121,11 +115,7 @@
     % forward modeling
     %% Describe synthesizAR code, maybe a diagram?
     \begin{block}{Forward Modeling Emission from Active Region Cores}
-        % forward modeling details here
-        % show HMI map with lines
-        % equation for intensity calculation
-        % discuss steps
-    \begin{columns}[T]
+    \begin{columns}[c]
         \begin{column}{0.49\columnwidth}
             \begin{figure}
                 \subfigure{%
@@ -199,19 +189,15 @@
             \label{fig:wait_time_and_hydro}             
         \end{figure}
         \begin{itemize}
-        \item Nanoflare model of \citet{parker_nanoflares_1988}: corona heated by impulsive ($\ll\tau_{cool}$), low-energy ($\sim10^{24}$ erg) events produced by twisting, braiding of field lines
-        \item Each strand heated independently by repeating triangular pulses of duration $\tau=200$ s; preferentially heat electrons 
-        \item Use extrapolated field strength to estimate total energy input per strand as,
-        \begin{equation*}
-            E = (\epsilon B)^2/8\pi
-        \end{equation*}
-        \item $\epsilon=0.1$ is the stressing coefficient and $B$ is the average field strength per strand
-        \item Event energies chosen from a power-law distribution with $\alpha=-2.5$ such that total energy constrained as above
-        \item Choose four different average waiting times $\langle t_N\rangle=250,\,750,\,2500,\,5000$ s 
-        \begin{itemize}
-        \item Range from high-frequency heating (250 s) to low-frequency heating (5000 s)
-        \item $t_{N,i}\propto E_i$ such that larger events require a longer ``winding time'', consistent with Parker nanoflare picture \citep[e.g.][]{cargill_active_2014,barnes_inference_2016-1}
-        \end{itemize}
+            \item Time-dependent heating ($Q(t)$ in our hydrodynamic model) modeled as a series of discrete triangular pulses with variable magnitude and frequency and fixed duration (200 s), consistent with nanoflare model of \citet{parker_nanoflares_1988}
+            \item Peak heating rates on each strand chosen from a power-law distribution with slope $\alpha=-2.5$ and upper bound $E_{\max,s}=(\epsilon \bar{B}_s)^2/8\pi$ and lower bound iteratively adjusted to obey observational constraint on total flux into AR, $10^7$ erg cm$^{-2}$ s$^{-1}$ according to \citet{withbroe_mass_1977}
+            \item Frequency defined in terms of $\varepsilon$, the ratio of the average delay between events, $\langle t_N\rangle$ to the characteristic cooling time of a strand $s$, $\tau_{cool,s}$, such that $\varepsilon = \tau_{cool,s}/\langle t_N\rangle$
+            \item Explore several different heating models:
+            \begin{itemize}
+                \item Nanoflare models with low ($\varepsilon=5$), intermediate ($\varepsilon=1$), and high ($\varepsilon=0.1$) frequency events
+                \item Cooling-only (control) model where there is a single event on every strand at $t=0$ s that releases $E_{\max,s}$ energy.
+            \end{itemize}
+            \item In the nanoflare models, the delay time preceding an event is proportional to the magnitude of the event in order to simulate the buildup of stress in the field prior to reconnection \citep[e.g. see][]{cargill_active_2014,barnes_inference_2016-1}
         \end{itemize}
     \end{block}
     % 
@@ -275,9 +261,10 @@
     %Conclusions
     \begin{block}{Conclusions and Future Work}
       \begin{itemize}
-        \item some Conclusions
-        \item about the timelag results
-        \item can go here
+        \item Developed an efficient and well-organized pipeline for forward modeling emission from ARs and computing $\tau^*_{A,B}$
+        \item Distributions of timelags provide a potential discriminator between low, intermediate, and high frequency heating
+        \item \citet{viall_survey_2017} have produced timelag maps from observations of NOAA AR 1158--need detailed statistical comparisons
+        \item Need to include more detailed calculation of AIA intensities, e.g. using CHIANTI atomic database \citep{dere_chianti_1997,young_chianti_2016} and including nonequilibrium ionization
       \end{itemize}
     \end{block}
     %
