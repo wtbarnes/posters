@@ -75,11 +75,12 @@
   %%
   %%first column
   \begin{column}{0.49\linewidth}
+    \vspace{-1ex}
     %
     %introduction
     \begin{block}{The Coronal Heating Problem}
         \begin{itemize}
-            \item Longstanding problem in solar astrophysics: \alert{what heats the corona, the outermost layer of the solar atmosphere, to temperatures in excess of $10^6$ K while the solar surface is only $\approx6\times10^3$ K?}
+            \item Long-standing problem in solar astrophysics: \alert{what heats the corona, the outermost layer of the solar atmosphere, to temperatures in excess of $10^6$ K while the solar surface is only $\approx6\times10^3$ K?}
             \item Energy stored in the complex coronal magnetic field, but how does it make it to the plasma?
             \item Wealth of high-quality, but extremely complex remote-sensing data in solar physics, e.g. Atmospheric Imaging Assembly (AIA) on the Solar Dynamics Observatory (SDO) produces over 1 TB of data per day in six different wavelength passbands at 0.6 arcsec-per-pixel resolution and a 10 s cadence \citep{lemen_atmospheric_2012}
             \item \alert{Goal:} Forward model (i.e. produce synthetic data products from simulation) AIA intensity maps of active regions, areas of intense magnetic activity, for a range of heating parameters and compare with observations to assess the viability of different heating models
@@ -114,7 +115,7 @@
     %
     % forward modeling
     %% Describe synthesizAR code, maybe a diagram?
-    \begin{block}{Forward Modeling Emission from Active Region Cores}
+    \begin{block}{Forward Modeling Emission from Active Regions}
     \begin{columns}[c]
         \begin{column}{0.49\columnwidth}
             \begin{figure}
@@ -163,7 +164,7 @@
     \begin{block}{Synthesizing AIA Intensities}
         \begin{figure}
             \includegraphics[width=\columnwidth]{figures/aia_intensities.pdf}
-            \caption{Synthesized intensity maps of a section of NOAA 1158 for all six extreme ultraviolet (EUV) channels of the AIA instrument. To forward model the AIA intensities, a hydrodynamic simulation is run for each of the $10^4$ strands in the AR, the resulting temperatures and densities are folding through the relevant response functions (see Fig. \ref{fig:response_functions}), and the intensities are projected along the line of sight. Shown here is a snapshot at $t=10^4$ s during the simulation.} 
+            \caption{Synthesized intensity maps of a section of NOAA 1158 for all six extreme ultraviolet (EUV) channels of the AIA instrument. To forward model the AIA intensities, a hydrodynamic simulation is run for each of the $10^4$ strands in the AR, the resulting temperatures and densities are folded through the relevant response functions (see Fig. \ref{fig:response_functions}), and the intensities are projected along the line of sight. Shown here is a snapshot at $t=10^4$ s during the simulation.} 
             \label{fig:synthesized_aia_maps}
             \centering
         \end{figure}
@@ -175,9 +176,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%second column
   \begin{column}{0.49\linewidth}
+    \vspace{-1ex}
     % Heating model
     %% Explain heating models, energy distribution
     \begin{block}{Heating Models}
+        \vspace{-2ex}
         \begin{figure}
             \subfigure{%
             \includegraphics[width=0.49\columnwidth]{figures/heating_rate_distributions.pdf}
@@ -190,7 +193,7 @@
         \end{figure}
         \begin{itemize}
             \item Time-dependent heating ($Q(t)$ in our hydrodynamic model) modeled as a series of discrete triangular pulses with variable magnitude and frequency and fixed duration (200 s), consistent with nanoflare model of \citet{parker_nanoflares_1988}
-            \item Peak heating rates on each strand chosen from a power-law distribution with slope $\alpha=-2.5$ and upper bound $E_{\max,s}=(\epsilon \bar{B}_s)^2/8\pi$ and lower bound iteratively adjusted to obey observational constraint on total flux into AR, $10^7$ erg cm$^{-2}$ s$^{-1}$ according to \citet{withbroe_mass_1977}
+            \item Peak heating rates on each strand chosen from a power-law distribution with slope $\alpha=-2.5$ and upper bound $E_{\max,s}=(\epsilon \bar{B}_s)^2/8\pi$ (where $\bar{B}_s$ comes from the field extrapolation) and lower bound iteratively adjusted to obey observational constraint on total flux into AR, $10^7$ erg cm$^{-2}$ s$^{-1}$ according to \citet{withbroe_mass_1977}
             \item Frequency defined in terms of $\varepsilon$, the ratio of the average delay between events, $\langle t_N\rangle$ to the characteristic cooling time of a strand $s$, $\tau_{cool,s}$, such that $\varepsilon = \tau_{cool,s}/\langle t_N\rangle$
             \item Explore several different heating models:
             \begin{itemize}
@@ -199,6 +202,7 @@
             \end{itemize}
             \item In the nanoflare models, the delay time preceding an event is proportional to the magnitude of the event in order to simulate the buildup of stress in the field prior to reconnection \citep[e.g. see][]{cargill_active_2014,barnes_inference_2016-1}
         \end{itemize}
+        \vspace{-1ex}
     \end{block}
     % 
     % cross correlations
@@ -212,7 +216,7 @@
                 \subfigure{%
                 \includegraphics[width=\columnwidth]{figures/cooling_cross_correlations_1d.pdf}
                 \label{fig:1d_correlations}}
-                \caption{\textbf{Top:} Normalized timeseries for all of the AIA channels for the cooling-only case. Note that the intensity peaks in successively cooler channels as the loops cool from well above 10 MK to below 1 MK. This timeseries is extracted from a single-pixel in the center of the AR. \textbf{Bottom:} Normalized cross-correlation curves as a function offset for several different channel pairs. The dot at the maximum of each $C_{A,B}$ curve indicates the value of $\tau^*_{A,B}$. Note that for the 335-171 and 94-171 channel pairs, the timelag is positive, meaning plasma is cooling first through the 335 \ang (or 94 \ang) passband and then through the 171 \ang passband.}
+                \caption{\textbf{Top:} Normalized timeseries for all of the AIA channels for the cooling-only case. Note that the intensity peaks in successively cooler channels as the loops cool from well above 10 MK to below 1 MK. This timeseries is extracted from a single-pixel in the center of the AR. \textbf{Bottom:} Normalized cross-correlation curves as a function of $\tau$ for several different channel pairs. The dot at the maximum of each $C_{A,B}$ curve indicates the value of $\tau^*_{A,B}$. Note that for the 335-171 and 94-171 channel pairs, the timelag is positive, meaning plasma is cooling first through the 335 \ang (or 94 \ang) passband and then through the 171 \ang passband.}
             \end{figure}
             \end{column}
             \begin{column}{0.49\columnwidth}
@@ -225,7 +229,7 @@
                     where $\mathcal{F}$ is the Fourier transform and $\tau$ is the offset
                     \item Define the \alert{timelag} between two channels $A$ and $B$, $\tau^*_{A,B}$, as that offset which maximizes the cross-correlation,
                     \begin{equation}
-                        \tau^*_{A,B} = \argmax_{\tau}C_{AB}(\tau)
+                        \tau^*_{A,B} = \argmax_{\tau}C_{A,B}(\tau)
                     \end{equation}
                     \item By convention, $\tau^*_{A,B}>0$ indicates that the peak in $s_A$ is followed by the peak in $s_B$; if $T_{peak,A}>T_{peak,B}$, $\tau^*_{A,B}$ indicates \alert{cooling} plasma
                     \item Compute $C_{A,B}$ and $\tau^*_{A,B}$ in each pixel of the AR (see Fig. \ref{fig:timelag_maps})--understand cooling patterns for a given heating model and compare to observed $\tau^*_{A,B}$
@@ -241,11 +245,13 @@
                 \end{figure}
             \end{column}
         \end{columns}
+        \vspace{-3ex}
     \end{block}
     %
     % timelag maps
     %% maps of maximum timelags
     \begin{block}{Timelag Maps}
+        \vspace{-2ex}
         \begin{figure}
             \subfigure{%
             \includegraphics[width=0.54\columnwidth]{figures/timelag_maps_335_171.pdf}
@@ -253,19 +259,22 @@
             \subfigure{%
             \includegraphics[width=0.45\columnwidth]{figures/timelag_histograms.pdf}
             \label{fig:timelag_histos}}
-            \caption{\textbf{Left:} $\tau^*_{335,171}$ computed in each pixel of the synthesized AIA intensity maps for all four heating scenarios computed over $10^4$ s. \textbf{Right:} Histograms of $\tau^*$ values for the entire AR for the 335-171 channel pair (top) and the 94-171 channel pair (bottom). Note the predominance of zero timelags in four heating scenarios.}
+            \caption{\textbf{Left:} $\tau^*_{335,171}$ computed in each pixel of the synthesized AIA intensity maps for all four heating scenarios computed over $10^4$ s. \textbf{Right:} Histograms of $\tau^*$ values for the entire AR for the 335-171 channel pair (top) and the 94-171 channel pair (bottom). Note the predominance of zero timelags in all four heating scenarios.}
             \label{fig:timelags}
         \end{figure}
+        \vspace{-2ex}
     \end{block}
     %
     %Conclusions
     \begin{block}{Conclusions and Future Work}
-      \begin{itemize}
-        \item Developed an efficient and well-organized pipeline for forward modeling emission from ARs and computing $\tau^*_{A,B}$
-        \item Distributions of timelags provide a potential discriminator between low, intermediate, and high frequency heating
-        \item \citet{viall_survey_2017} have produced timelag maps from observations of NOAA AR 1158--need detailed statistical comparisons
-        \item Need to include more detailed calculation of AIA intensities, e.g. using CHIANTI atomic database \citep{dere_chianti_1997,young_chianti_2016} and including nonequilibrium ionization
-      \end{itemize}
+        \vspace{-1ex}
+        \begin{itemize}
+            \item Developed an efficient and well-organized pipeline for forward modeling emission from ARs and computing $\tau^*_{A,B}$
+            \item Distributions of timelags provide a potential discriminator between low, intermediate, and high frequency heating
+            \item \citet{viall_survey_2017} have produced timelag maps from observations of NOAA AR 1158--need detailed statistical comparisons between model output and observations
+            \item Need to include more detailed calculation of AIA intensities, e.g. using CHIANTI atomic database \citep{dere_chianti_1997,young_chianti_2016} and including nonequilibrium ionization
+        \end{itemize}
+        \vspace{-1ex}
     \end{block}
     %
     %references
