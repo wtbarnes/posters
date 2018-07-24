@@ -23,7 +23,7 @@ $ ./setup_themes.sh /path/to/my/texmf/ clean
 
 * Open up PDF in Preview on one of the Macs in the Mudd building
 * Print to one of the least-busy, non-glossy plotters (`plotter[1-6]`)
-* For 36 in. by 48 in. (suggested for most US-based conferences), choose the "Arch E" size option
-  * There are a couple of different suboptions here, not clear which one is the best to choose
-  * For my SHINE 2017 poster, I used the "oversize" option and it cut off a significant portion of the right margin
-  * Maybe just best to stick with the normal "Arch E" option?
+* ~~For 36 in. by 48 in. (suggested for most US-based conferences), choose the "Arch E" size option~~
+  * ~~There are a couple of different suboptions here, not clear which one is the best to choose~~
+  * ~~For my SHINE 2017 poster, I used the "oversize" option and it cut off a significant portion of the right margin~~
+  * ~~Maybe just best to stick with the normal "Arch E" option?~~
