@@ -1,29 +1,29 @@
 %adobe reader fix
 \pdfminorversion=4
 
-\documentclass[final]{beamer}
+\documentclass[final,12pt]{beamer}
 
 %set image/logo options
 % Rice
 \def\RightLogoWidth{0.18}
 \def\RightLogoPaddingTop{0.25cm}
 \def\RightLogoPaddingBottom{0.5cm}
-\def\RightLogo{../logos/RiceLogo_TMCMYK300DPI.jpg}
+\def\RightLogo{../../logos/RiceLogo_TMCMYK300DPI.jpg}
 % SHINE
 \def\LeftLogoWidth{0.17}
 \def\LeftLogoPaddingTop{0.5cm}
 \def\LeftLogoPaddingBottom{0.5cm}
-\def\LeftLogo{../logos/shine-logo.png}
+\def\LeftLogo{../../logos/shine-logo.png}
 % SunPy
 \def\AnotherLeftLogoWidth{0.06}
 \def\AnotherLeftLogoPaddingTop{0.25cm}
 \def\AnotherLeftLogoPaddingBottom{0.25cm}
-\def\AnotherLeftLogo{../logos/sunpy_powered_logo.png}
+\def\AnotherLeftLogo{../../logos/sunpy_powered_logo.png}
 % Title and author(s) block
 \def\TitleWidth{0.55}
 % GitHub
 \def\GitHubLogoWidth{0.014\paperwidth}
-\def\GitHubLogo{../logos/GitHub-Mark-120px-plus.png}
+\def\GitHubLogo{../../logos/GitHub-Mark-120px-plus.png}
 \def\GitHubUser{wtbarnes}
 % Affiliation in footer
 \def\AffiliationFooter{Department of Physics and Astronomy - Rice University - Houston, TX USA}
@@ -36,19 +36,15 @@
 \usetheme{I6dv_custom}
 }
 \setbeamertemplate{caption}[numbered]
+\usefonttheme[onlymath]{serif}
 
 %Include packages
 \usepackage{soul,color,verbatim}
-\usepackage{type1cm}
-\usepackage{calc}
-%\usepackage{times,mathptmx}
-\usepackage{amsmath,amsthm,amssymb,latexsym}
-\usepackage{empheq}
+\usepackage{amsmath,amsthm,amssymb}
 \usepackage{graphicx}
 \usepackage{epstopdf}
 \usepackage[numbers]{natbib}
 \usepackage{multicol}
-\usepackage{subfigure}
 \usepackage[english]{babel}
 %\usepackage[latin1]{inputenc}
 \usepackage{tikz}
@@ -173,7 +169,7 @@
     \begin{block}{References}
       \scriptsize
       \begin{multicols}{2}
-        \bibliographystyle{../apj.bst}
+        \bibliographystyle{../../apj.bst}
         \bibliography{references.bib}
       \end{multicols}
     \end{block}
