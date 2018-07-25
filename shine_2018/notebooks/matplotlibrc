@@ -1,0 +1,29 @@
+#Text
+font.family : CMU Sans Serif
+#font.serif : Computer Modern Roman
+#font.sans-serif : Computer Modern Sans Serif
+#font.monospace : Computer Modern Typewriter
+#text.usetex : true
+mathtext.default : it
+mathtext.fontset : cm
+text.latex.unicode : true
+#Axes
+axes.titlesize : 12
+axes.labelsize : 12
+#Lines
+lines.linewidth : 2
+#Ticks
+xtick.labelsize : 10
+ytick.labelsize : 10
+xtick.major.pad : 8
+xtick.minor.pad : 8
+ytick.major.pad : 8
+ytick.minor.pad : 8
+ytick.direction : in
+xtick.direction : in
+#Legend
+legend.fontsize : 10
+#Save
+savefig.dpi : 200
+savefig.format : pdf
+savefig.bbox : tight
