@@ -1,14 +1,11 @@
 #Text
-font.family : CMU Sans Serif
-#font.serif : Computer Modern Roman
-#font.sans-serif : Computer Modern Sans Serif
-#font.monospace : Computer Modern Typewriter
-#text.usetex : true
-mathtext.default : it
-mathtext.fontset : cm
-text.latex.unicode : true
+#font.family : cmss10 #CMU Sans Serif # use one of the custom fonts
+#font.family : sans-serif
+#font.sans-serif : stixsans
+text.usetex : false
+#mathtext.fontset : stixsans
 #Axes
-axes.unicode_minus : False
+axes.unicode_minus : false # may be need for some fonts
 axes.titlesize : 14
 axes.labelsize : 14
 #Lines
