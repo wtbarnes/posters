@@ -1,3 +1,5 @@
+*dask-worker-space/
+
 ## Python ##
 # Byte-compiled / optimized / DLL files
 __pycache__/
