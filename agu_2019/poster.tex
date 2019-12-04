@@ -12,14 +12,14 @@
 % Dimensions: 4'-by-3' in cm
 \usepackage[size=custom,width=121.92,height=91.44,scale=1.0]{beamerposter}
 \usetheme{gemini}
-\usecolortheme{gemini}
+\usecolortheme{labsix}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usepackage{multicol}
 \usepackage[numbers]{natbib}
-
+\usepackage{import}
 
 % ====================
 % Lengths
@@ -34,40 +34,55 @@
 
 \newcommand{\separatorcolumn}{\begin{column}{\sepwidth}\end{column}}
 
-% ====================
-% Title
-% ====================
-
 \title{The Sun at Scale: Interactive Analysis of SDO Data on HPC Platforms with Dask}
 
-\author{Will Barnes \inst{1}\inst{2}\inst{3}\textsuperscript{\inst{\dagger}} \and
+\author{Will Barnes \inst{1}\textsuperscript{,}\inst{2}\textsuperscript{,}\inst{3}\textsuperscript{\inst{\dagger}} \and
         Mark Cheung \inst{2} \and
         Monica Bobra \inst{3} \and
-        Arthur Amezcua \inst{3}
+        Arthur Amezcua \inst{3} \and
+        Herbert Yeung \inst{4}\textsuperscript{,}\inst{5} \and
+        Stuart Mumford \inst{6}
 }
 
 \institute[]{
   \inst{1} Bay Area Environmental Research Institute \samelineand
   \inst{2} Lockheed Martin Solar and Astrophysics Laboratory \samelineand
   \inst{3} W. W. Hansen Experimental Physics Laboratory, Stanford University \and
+  \inst{4} Arctic Slope Regional Corporation \samelineand
+  \inst{5} NASA Ames Research Center \samelineand
+  \inst{6} University of Sheffield \samelineand
   \inst{\dagger} Visiting Postdoctoral Scholar
 }
 
-% ====================
-% Footer (optional)
-% ====================
-
 \footercontent{
   \href{https://gitlab.com/wtbarnes/aia-on-pleiades}{gitlab.com/wtbarnes/aia-on-pleiades} \hfill
-  AGU Fall Meeting 2019, San Francisco, CA USA --- 12 December 2019 \hfill
-  \href{mailto:barnes@baeri.org}{barnes@baeri.org}}
-% (can be left out to remove footer)
-
-% ====================
-% Body
-% ====================
+  AGU Fall Meeting 2019 --- San Francisco, CA USA --- 12 December 2019 \hfill
+  \href{mailto:barnes@baeri.org}{barnes@baeri.org}
+}
 
 \begin{document}
+
+% Logos
+% LMSAL logo goes here
+\addtobeamertemplate{headline}{} 
+{
+    \begin{tikzpicture}[remember picture,overlay] 
+      \node [anchor=north west, inner sep=3cm] at ([xshift=1.4cm,yshift=1.3cm]current page.north west)     {\includegraphics[height=8cm]{../logos/SU_Seal_Red.png}};
+    \end{tikzpicture} 
+}
+\addtobeamertemplate{headline}{} 
+{
+    \begin{tikzpicture}[remember picture,overlay] 
+      \node [anchor=north east, inner sep=3cm] at ([xshift=-8cm,yshift=1.3cm]current page.north east)     {\includegraphics[height=8cm]{../logos/sunpy_powered_logo.png}}; 
+    \end{tikzpicture} 
+}
+\addtobeamertemplate{headline}{} 
+{
+    \begin{tikzpicture}[remember picture,overlay] 
+      \node [anchor=north east, inner sep=3cm] at ([xshift=2cm,yshift=1.3cm]current page.north east)     {\includegraphics[height=8cm]{../logos/agu_centennial.png}}; 
+    \end{tikzpicture} 
+}
+
 
 \begin{frame}[t]
 \begin{columns}[t]
@@ -76,19 +91,46 @@
 \begin{column}{\colwidth}
 
   \begin{block}{The Solar Dynamics Observatory}
+    \begin{columns}
+      \begin{column}{0.6667\columnwidth}
+        A picture of the Sun as captured by SDO
 
-    A picture of the Sun as captured by SDO
+        Followed by some facts about SDO/AIA and data products
 
-    Followed by some facts about SDO/AIA and data products
-    Make sure to emphasize the problem we are trying to solve!
+        Make sure to emphasize the problem we are trying to solve!
+      \end{column}
+      \begin{column}{0.333\columnwidth}
+        \begin{figure}
+          \centering
+          \includegraphics[width=\columnwidth]{figures/sdo.png}
+        \end{figure}
+      \end{column}
+    \end{columns}
 
   \end{block}
 
   \begin{block}{An Interactive and Scalable Python Workflow}
 
-    Diagrams comparing old and new workflows
+    Diagrams of old workflow
+
+    \begin{figure}
+      \centering
+      \def\svgwidth{0.7\columnwidth}
+      \import{figures/}{old_workflow.pdf_tex}
+      %\resizebox{0.65\columnwidth}{!}{\import{figures/}{old_workflow.pdf_tex}}
+    \end{figure}
+
+    Diagram of new workflow
+
+    \begin{figure}
+      \centering
+      \def\svgwidth{0.8\columnwidth}
+      \import{figures/}{new_workflow.pdf_tex}
+      %\resizebox{0.65\columnwidth}{!}{\import{figures/}{old_workflow.pdf_tex}}
+    \end{figure}
 
     Discuss each and why new one is better (briefly)
+
 
   \end{block}
 
@@ -97,6 +139,8 @@
     Describe what we've done so far
 
     Data moved from JSOC to Ames (see slides from Art)
+
+    Query data using drms module \citet{glogowski_drms_2019}
 
     Jupyter notebooks running on Pleiades
 
@@ -164,7 +208,7 @@
 
     What we did, why would we want to do this
 
-    How fast was it
+    How fast was it (compare to serial computation)
 
     Show sunspot count as function of time, butterfly diagram
 
@@ -197,8 +241,10 @@
   \end{block}
 
   \begin{block}{References}
-
     \scriptsize
+
+    We thank Wei Liu, Ignacio Ugarte-Urra, and Fraser Watson for their help in developing example use cases. We also thank Jeff Becker and Bob Ciotti for their assistance with the Pleiades HPC system. 
+
       \begin{multicols}{2}
         \bibliographystyle{../apj.bst}
         \bibliography{references.bib}
