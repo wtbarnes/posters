@@ -1,0 +1,40 @@
+\begin{block}{Example: Global EUV Waves}
+
+\begin{columns}
+\begin{column}{0.6\columnwidth}
+Why is this important, e.g. \citet{liu_truly_2018}
+
+Describe analysis pipeline, including gathering data
+
+Show plot of log running ratio
+\end{column}
+
+\begin{column}{0.4\columnwidth}
+% spell-checker: disable %
+\begin{pycode}[manager]
+fig = plt.figure(figsize=texfigure.figsize(
+  pytex,
+  scale=1,
+  height_ratio=1,
+))
+m = sunpy.map.Map(os.path.join(manager.data_dir, 'running_ratio_171.fits'))
+ax = fig.gca(projection=m)
+m.plot(axes=ax,
+       norm=ImageNormalize(vmin=-0.125, vmax=0.125),
+       title=False,
+       cmap='better_RdBu')
+ax.grid(False)
+ax.coords[0].set_axislabel('Helioprojective Longitude')
+ax.coords[1].set_axislabel('Helioprojective Latitude')
+ax.coords[1].set_ticklabel(rotation='vertical')
+tfig = manager.save_figure('euv-wave-ratio', fext='.pdf')
+#tfig.caption = r''
+tfig.figure_width = r'\columnwidth'
+\end{pycode}
+\py[manager]|tfig|
+% spell-checker: enable %
+\end{column}
+
+\end{columns}
+
+\end{block}
