@@ -1,0 +1,102 @@
+%spell-checker: disable
+%  PythonTeX Configuration
+
+\usepackage{pythontex}
+\usepackage{pgf}
+\usepackage{import}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+% PythonTeX Bug Fix % % % % % % % % % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+% pytexbug fix for context in customcode.
+\makeatletter
+\renewenvironment{pythontexcustomcode}[2][begin]{%
+	\VerbatimEnvironment
+	\Depythontex{env:pythontexcustomcode:om:n}%
+	\ifstrequal{#1}{begin}{}{%
+		\ifstrequal{#1}{end}{}{\PackageError{\pytx@packagename}%
+			{Invalid optional argument for pythontexcustomcode}{}
+		}%
+	}%
+	\xdef\pytx@type{CC:#2:#1}%
+	\edef\pytx@cmd{code}%
+	% PATCH \def\pytx@context{}%
+	\pytx@SetContext
+	% END PATCH
+	\def\pytx@group{none}%
+	\pytx@BeginCodeEnv[none]}%
+{\end{VerbatimOut}%
+\setcounter{FancyVerbLine}{\value{pytx@FancyVerbLineTemp}}%
+\stepcounter{\pytx@counter}%
+}%
+\makeatother
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\setpythontexcontext{textwidth=\the\textwidth,columnwidth=\the\columnwidth,figurewidth=\the\textwidth}
+
+%% Setup PythonTeX and TeXFigure
+\begin{pythontexcustomcode}{py}
+import os
+import pathlib
+import sys
+sys.path.append('./python/')
+
+import texfigure
+pytex.formatter = texfigure.repr_latex_formatter
+
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+import matplotlib.colors
+import seaborn
+import sunpy.map
+import astropy.units as u
+import astropy.constants as const
+from astropy.visualization import ImageNormalize, AsinhStretch, SqrtStretch, LogStretch
+
+# Define color palettes
+PALETTE = seaborn.color_palette('colorblind', 100)
+DEEP_PALETTE = seaborn.color_palette('deep', 100)
+# Register colormaps
+from colormaps import *
+
+# Set some plot styling here
+normalsize = 24.88  # it'd be better to set this automatically...
+preamble = [
+	r'\usepackage{siunitx}',
+	r'\DeclareSIUnit[number-unit-product={}]\erg{erg}',
+	r'\DeclareSIUnit[number-unit-product={}]\dn{DN}',
+	r'\DeclareSIUnit[number-unit-product={}]\pixel{pixel}',
+	r'\DeclareSIUnit[number-unit-product={}]\photon{photon}',
+	r'\DeclareSIUnit[number-unit-product={}]\gauss{G}',
+	r'\DeclareSIUnit[number-unit-product={}]\dyne{dyne}',
+]
+rc = {
+	'pgf.preamble': preamble,
+	'pgf.rcfonts': False,
+	'pgf.texsystem': 'lualatex',
+	'text.latex.preamble': preamble,
+	'text.usetex': True,
+	'font.family': 'sans-serif',
+	'font.serif': [], # Leave blank to inherit from document
+	'font.sans-serif': [], # Leave blank to inherit from document
+	'font.monospace': [], # Leave blank to inherit from document
+	'font.size': normalsize,
+	'axes.titlesize': normalsize,
+	'axes.labelsize': 0.9 * normalsize,
+	'axes.labelpad': 5,
+	'legend.fontsize': 0.75 * normalsize,
+	'xtick.labelsize': 0.75 * normalsize,
+	'ytick.labelsize': 0.75 * normalsize,
+	'xtick.major.pad': 5,
+	'xtick.minor.pad': 5,
+	'ytick.major.pad': 5,
+	'ytick.minor.pad': 5,
+	'xtick.direction': 'in',
+	'ytick.direction': 'in',
+	'savefig.dpi': 200,
+	'savefig.format': 'pdf',
+	'savefig.bbox': 'tight',
+}
+texfigure.configure_latex_plots(pytex, **rc)
+
+\end{pythontexcustomcode}
