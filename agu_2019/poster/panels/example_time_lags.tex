@@ -4,7 +4,78 @@ How can time lag analysis be used to understand coronal heating \citet{viall_evi
 
 Describe time lag mathematically \citet{barnes_understanding_2019}
 
-Show time lag map for a single channel pair
+Show time lag and cross correlation maps for a single channel pair (side by side)
+
+% spell-checker: disable %
+\begin{pycode}[manager]
+m_tl = sunpy.map.Map(os.path.join(manager.data_dir, 'time_lag_94_171.fits'))
+m_cc = sunpy.map.Map(os.path.join(manager.data_dir, 'max_cc_94_171.fits'))
+# Plot
+fig = plt.figure(figsize=texfigure.figsize(
+    pytex,
+    scale=1,
+    height_ratio=0.5,
+    figure_width_context='figurewidth',
+))
+# timelag map
+ax = fig.add_subplot(121, projection=m_tl)
+im = m_tl.plot(
+    axes=ax,
+    vmin=-(6e3*u.s).to(u.s).value,
+    vmax=(6e3*u.s).to(u.s).value,
+    cmap='idl_bgry_004',
+    title=False,
+    annotate=False,
+)
+ax.grid(False)
+ax.coords[0].set_axislabel('Helioprojective Longitude')
+ax.coords[1].set_axislabel('Helioprojective Latitude')
+ax.coords[1].set_ticklabel(rotation='vertical')
+pos = ax.get_position().get_points()
+cax = fig.add_axes([
+    pos[0,0],
+    pos[1,1]+0.01,  # pad a bit to lift off the top of the plot
+    pos[1,0]-pos[0,0],  # width of the plot
+    0.025,
+])
+cbar = fig.colorbar(im, cax=cax, orientation='horizontal')
+#cbar.locator = matplotlib.ticker.FixedLocator([-1e2,0,1e2])
+#cbar.update_ticks()
+cbar.ax.xaxis.set_ticks_position('top')
+# maxcc map
+ax = fig.add_subplot(122, projection=m_cc)
+im = m_cc.plot(
+    axes=ax,
+    vmin=0,
+    vmax=1,
+    cmap='magma',
+    title=False,
+    annotate=False,
+)
+ax.grid(False)
+ax.coords[0].set_axislabel('Helioprojective Longitude')
+ax.coords[1].set_axislabel(' ')
+ax.coords[1].set_ticklabel(rotation='vertical',)
+pos = ax.get_position().get_points()
+cax = fig.add_axes([
+    pos[0,0],
+    pos[1,1]+0.01,  # pad a bit to lift off the top of the plot
+    pos[1,0]-pos[0,0],  # width of the plot
+    0.025,
+])
+cbar = fig.colorbar(im, cax=cax, orientation='horizontal')
+#cbar.locator = matplotlib.ticker.FixedLocator([-1e2,0,1e2])
+#cbar.update_ticks()
+cbar.ax.xaxis.set_ticks_position('top')
+# Save
+tfig = manager.save_figure('time-lag-maps', fext='.pdf')
+tfig.caption = r''
+tfig.figure_width = r'0.95\columnwidth'
+\end{pycode}
+\py[manager]|tfig|
+% spell-checker: enable %
+
+Explain how dask helps speed up
 
 Show scaling of time lag calculation with number of cores
 
