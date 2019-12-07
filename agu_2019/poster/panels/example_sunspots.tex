@@ -1,0 +1,61 @@
+\begin{block}{Example: Automatic Detection of Sunspots}
+
+Describe STARA algorithm \citet{watson_modelling_2009}
+
+What we did, why would we want to do this
+
+How fast was it (compare to serial computation)? 
+
+Read in data, resampled images, and performed automatic sunspot detection using STARA on 1 image per day for the entire mission and built catalogue of segmented regions in less than 2 minutes using 660 computing cores (55 nodes with 12 cores each)
+
+Show sunspot count as function of time, butterfly diagram, maybe 
+
+% spell-checker: disable %
+\begin{pycode}[manager]
+# Load table
+tab = astropy.table.Table.read(os.path.join(manager.data_dir, 'sunspot_catalogue.fits'))
+tab['obstime'] = astropy.time.Time(tab['obstime'])
+# Calculate monthly sunpot number
+delta_time = tab['obstime'] - tab['obstime'][0]
+bin_size = 30*u.day
+spots,bins = np.histogram(
+    delta_time.to(bin_size.unit).value,
+    bins=np.arange(0,(delta_time[-1]+1*u.day).to(bin_size.unit).value, bin_size.value),)
+time_spots = (bins[1:] + bins[:-1])/2*u.day + tab['obstime'][0]
+kernel = Box1DKernel(6)  # smooth over 6 months because 1 time unit is 30 days
+spots_smooth = convolve(spots, kernel)
+# Plot
+fig = plt.figure(figsize=texfigure.figsize(
+    pytex,
+    scale=1,
+    height_ratio=0.4,
+))
+# sunspot number
+ax = fig.add_subplot(121)
+with time_support(simplify=True, format='decimalyear'):
+    ax.plot(time_spots, spots,)
+    ax.plot(time_spots, spots_smooth)
+ax.set_ylabel('Number of Spots (monthly total)');
+ax.set_xlabel(f'Time');
+ax.set_ylim(0, spots.max()*1.05);
+# butterfly diagram
+ax = fig.add_subplot(122)
+with time_support(simplify=True, format='decimalyear'):
+    ax.scatter(tab['obstime'][::10], tab['center_lat'][::10],
+    marker='o', alpha=0.1)
+ax.axhline(y=0, ls='--', color='k')
+ax.axhline(y=-30, ls=':',color='k')
+ax.axhline(y=+30, ls=':',color='k')
+ax.set_ylim(-40,40)
+ax.set_xlabel(f'Time')
+ax.set_ylabel(f'Heliographic Latitude [{tab["center_lat"].unit}]');
+plt.subplots_adjust(wspace=0.3)
+# Save plot
+tfig = manager.save_figure('sunspots', fext='.pgf')
+tfig.caption = r''
+tfig.figure_width = r'0.95\columnwidth'
+\end{pycode}
+\py[manager]|tfig|
+% spell-checker: enable %
+
+\end{block}

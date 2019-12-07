@@ -69,7 +69,7 @@
 \addtobeamertemplate{headline}{} 
 {
     \begin{tikzpicture}[remember picture,overlay] 
-      \node [anchor=north west, inner sep=3cm] at ([xshift=1.4cm,yshift=1.3cm]current page.north west)     {\includegraphics[height=8cm]{../../logos/SU_Seal_Red.png}};
+      \node [anchor=north west, inner sep=3cm] at ([xshift=1.4cm,yshift=1.3cm]current page.north west)     {\includegraphics[height=8cm]{../../logos/SU_Seal_Red_R_Small.eps}};
     \end{tikzpicture} 
 }
 \addtobeamertemplate{headline}{} 
@@ -184,24 +184,7 @@ manager = texfigure.Manager(
     Show Dask layout glyph, NDCube data model
 
     Estimate of how long it would take to process the current data volume from level 1 to level 1.5
-
-    % spell-checker: disable %
-    \begin{pycode}[manager]
-fig = plt.figure(figsize=texfigure.figsize(
-  pytex,
-  #scale=1,
-  #height_ratio=1,
-))
-ax = fig.gca()
-ax.plot([0,1],[0,1])
-ax.set_xlabel('This is the x axis')
-ax.set_ylabel('This is the y axis')
-tfig = manager.save_figure('test-figure', fext='.pgf')
-tfig.figure_width = r'0.3\columnwidth'
-    \end{pycode}
-    \py[manager]|tfig|
-    % spell-checker: enable %
-
+  
   \end{block}
 
   \include{panels/example_euv_waves}
@@ -213,17 +196,7 @@ tfig.figure_width = r'0.3\columnwidth'
 
 \begin{column}{\colwidth}
 
-  \begin{block}{Example: Automatic Detection of Sunspots}
-
-    Describe STARA algorithm \citet{watson_modelling_2009}
-
-    What we did, why would we want to do this
-
-    How fast was it (compare to serial computation)
-
-    Show sunspot count as function of time, butterfly diagram
-
-  \end{block}
+  \include{panels/example_sunspots}
 
   \begin{block}{Example: Calculating SHARP Features}
 
