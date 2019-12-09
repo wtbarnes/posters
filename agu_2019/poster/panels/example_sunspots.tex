@@ -1,14 +1,11 @@
-\begin{block}{Example: Automatic Detection of Sunspots}
+\begin{block}{Application: Automatic Detection of Sunspots in HMI Continuum Data}
 
-Describe STARA algorithm \citet{watson_modelling_2009}
+\begin{itemize}
+    \item Sunspot number is an important proxy for understanding solar activity and solar cycle variability
+    \item Sunspot Tracking and Recognition Algorithm (STARA) code of \citet{watson_modelling_2009,watson_evolution_2011} automatically detects, tracks sunspots using top-hat transform and intensity thresholding
+    \item Translated STARA into Python using scikit-image \citep{van_der_walt_scikit-image_2014} for image processing and \texttt{numpy} \citep{van_der_walt_numpy_2011} for array computation
 
-What we did, why would we want to do this
-
-How fast was it (compare to serial computation)? 
-
-Read in data, resampled images, and performed automatic sunspot detection using STARA on 1 image per day for the entire mission and built catalogue of segmented regions in less than 2 minutes using 660 computing cores (55 nodes with 12 cores each)
-
-Show sunspot count as function of time, butterfly diagram, maybe 
+\end{itemize}
 
 % spell-checker: disable %
 \begin{pycode}[manager]
@@ -33,16 +30,18 @@ fig = plt.figure(figsize=texfigure.figsize(
 # sunspot number
 ax = fig.add_subplot(121)
 with time_support(simplify=True, format='decimalyear'):
-    ax.plot(time_spots, spots,)
-    ax.plot(time_spots, spots_smooth)
+    ax.plot(time_spots, spots, color=PALETTE[0], label='binned')
+    ax.plot(time_spots, spots_smooth, color=PALETTE[1], label='smoothed')
 ax.set_ylabel('Number of Spots (monthly total)');
 ax.set_xlabel(f'Time');
 ax.set_ylim(0, spots.max()*1.05);
+ax.legend(loc=1)
 # butterfly diagram
 ax = fig.add_subplot(122)
 with time_support(simplify=True, format='decimalyear'):
-    ax.scatter(tab['obstime'][::10], tab['center_lat'][::10],
-    marker='o', alpha=0.1)
+    ax.scatter(tab['obstime'],
+               tab['center_lat'],
+    marker='o', alpha=0.1, color=PALETTE[0])
 ax.axhline(y=0, ls='--', color='k')
 ax.axhline(y=-30, ls=':',color='k')
 ax.axhline(y=+30, ls=':',color='k')
@@ -52,10 +51,16 @@ ax.set_ylabel(f'Heliographic Latitude [{tab["center_lat"].unit}]');
 plt.subplots_adjust(wspace=0.3)
 # Save plot
 tfig = manager.save_figure('sunspots', fext='.pgf')
-tfig.caption = r''
+tfig.caption = r'\textbf{Left:} Number of sunspots detected by STARA since the start of the SDO mission. The detections are binned into 30 day bins. The orange line shows the sunspot number smoothed over 6 months. \textbf{Right:} Heliographic Stonyhurst latitude (in degrees) of every detected sunspot as a function of time. The dotted lines denote $\pm\ang{30}$ and the dashed line denotes \ang{0}.'
 tfig.figure_width = r'0.95\columnwidth'
 \end{pycode}
 \py[manager]|tfig|
 % spell-checker: enable %
 
+\begin{itemize}
+    \item Applied STARA to 1 HMI continuum image per day from May 2010 to present ($>3400$ images)
+    \item \alert{Using 660 cores across 55 compute nodes, built catalogue of all segmented regions in $<2$ minutes} (including reading data, resampling, and detection)
+    \item Previously, $\approx24$ hours required to process 5000 daily MDI images--\alert{speedup by factor of $\sim500$}
+    \item Such performance increases permit studies of how different algorithms, parameter selection may impact predictions of solar cycle variability
+\end{itemize}
 \end{block}

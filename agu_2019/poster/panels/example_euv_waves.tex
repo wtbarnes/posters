@@ -1,40 +1,63 @@
-\begin{block}{Example: Global EUV Waves}
+\begin{block}{Application: Tracking Global EUV Waves}
 
-\begin{columns}
-\begin{column}{0.6\columnwidth}
-Why is this important, e.g. \citet{liu_truly_2018}
-
-Describe analysis pipeline, including gathering data
-
-Show plot of log running ratio
-\end{column}
-
-\begin{column}{0.4\columnwidth}
 % spell-checker: disable %
 \begin{pycode}[manager]
 fig = plt.figure(figsize=texfigure.figsize(
-  pytex,
-  scale=1,
-  height_ratio=1,
+    pytex,
+    scale=0.8,
+    height_ratio=0.3,
 ))
-m = sunpy.map.Map(os.path.join(manager.data_dir, 'running_ratio_171.fits'))
-ax = fig.gca(projection=m)
-m.plot(axes=ax,
+
+m_before = sunpy.map.Map(os.path.join(manager.data_dir, 'running_ratio_171_before.fits'))
+m_during = sunpy.map.Map(os.path.join(manager.data_dir, 'running_ratio_171_during.fits'))
+m_after = sunpy.map.Map(os.path.join(manager.data_dir, 'running_ratio_171_after.fits'))
+# Before
+ax = fig.add_subplot(131, projection=m_before)
+m_before.plot(axes=ax,
        norm=ImageNormalize(vmin=-0.125, vmax=0.125),
        title=False,
        cmap='better_RdBu')
 ax.grid(False)
-ax.coords[0].set_axislabel('Helioprojective Longitude')
-ax.coords[1].set_axislabel('Helioprojective Latitude')
-ax.coords[1].set_ticklabel(rotation='vertical')
+ax.coords[0].set_axislabel(' ')
+ax.coords[1].set_axislabel(' ')
+ax.coords[0].set_ticklabel_visible(False)
+ax.coords[1].set_ticklabel_visible(False)
+# During
+ax = fig.add_subplot(132, projection=m_during)
+m_during.plot(axes=ax,
+       norm=ImageNormalize(vmin=-0.125, vmax=0.125),
+       title=False,
+       cmap='better_RdBu')
+ax.grid(False)
+ax.coords[0].set_axislabel(' ')
+ax.coords[1].set_axislabel(' ')
+ax.coords[0].set_ticklabel_visible(False)
+ax.coords[1].set_ticklabel_visible(False)
+# After
+ax = fig.add_subplot(133, projection=m_after)
+m_after.plot(axes=ax,
+       norm=ImageNormalize(vmin=-0.125, vmax=0.125),
+       title=False,
+       cmap='better_RdBu')
+ax.grid(False)
+ax.coords[0].set_axislabel(' ')
+ax.coords[1].set_axislabel(' ')
+ax.coords[0].set_ticklabel_visible(False)
+ax.coords[1].set_ticklabel_visible(False)
+plt.subplots_adjust(0.01)
 tfig = manager.save_figure('euv-wave-ratio', fext='.pdf')
-#tfig.caption = r''
+tfig.caption = r'Log of the running ratio of the 171 \angstrom{} intensity for a window of 240 s before (\textbf{left}), during (\textbf{middle}), and after (\textbf{right}) the 2017 September 10 flaring event. Red indicates areas where the plasma is being heated and blue indicates areas where the plasma is being cooled.'
 tfig.figure_width = r'\columnwidth'
 \end{pycode}
 \py[manager]|tfig|
 % spell-checker: enable %
-\end{column}
 
-\end{columns}
+\begin{itemize}
+    \item Global EUV waves, triggered by flares/CMEs, can be used to probe the global structure of the corona -- \alert{requires full-disk observations}
+    \item \citet{liu_truly_2018} used running ratio calculation in AIA 171, 193, 211 \angstrom{} to track global EUV wave from the 2017 September 10 X8.2+ flaring event
+    \item Registered and stacked 2 hours of full-resolution, full-disk AIA 171 \angstrom{} observations into coordinate-aware \texttt{ndcube} objects
+    \item \alert{Computed log running ratio in parallel for full 2 hour period in $<2$ minutes using \texttt{dask}}
+    \item Allows for quick visualization of high time resolution dynamics across the full disk
+\end{itemize}
 
 \end{block}
