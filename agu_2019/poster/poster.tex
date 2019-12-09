@@ -9,8 +9,10 @@
 
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-% Dimensions: 4'-by-3' in cm
-\usepackage[size=custom,width=121.92,height=91.44,scale=1.0]{beamerposter}
+% Dimensions: 4'-by-3.5' in cm
+% Cannot exceed 6'-by-4'=182.88 x 121.92 cm
+% Note: LMSAL printer width is 44''=111.76 cm
+\usepackage[size=custom,width=121.92,height=108.76,scale=1.0]{beamerposter}
 \usetheme{gemini}
 \usecolortheme{labsix}
 \usepackage{graphicx}
@@ -20,13 +22,20 @@
 \usepackage{multicol}
 \usepackage[numbers]{natbib}
 \usepackage{import}
+\usepackage{siunitx}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
 
+% hack to use the caption package with beamer
+\makeatletter
+\let\@@magyar@captionfix\relax
+\makeatother
+
+% Include all PythonTeX related stuff
 \input{pythontex}
 
-% ====================
 % Lengths
-% ====================
-
 % If you have N columns, choose \sepwidth and \colwidth such that
 % (N+1)*\sepwidth + N*\colwidth = \paperwidth
 \newlength{\sepwidth}
@@ -34,6 +43,11 @@
 \setlength{\sepwidth}{0.025\paperwidth}
 \setlength{\colwidth}{0.3\paperwidth}
 
+% Other macros
+\DeclareMathOperator*{\argmax}{arg\,max}
+\newcommand{\fourier}[1]{\mathscr{F}\left\{#1\right\}}
+\newcommand{\inversefourier}[1]{\mathscr{F}^{-1}\left\{#1\right\}}
+\newcommand{\angstrom}{\textup{\AA}}
 \newcommand{\separatorcolumn}{\begin{column}{\sepwidth}\end{column}}
 
 \title{The Sun at Scale: Interactive Analysis of SDO Data on HPC Platforms with Dask}
@@ -69,21 +83,27 @@
 \addtobeamertemplate{headline}{} 
 {
     \begin{tikzpicture}[remember picture,overlay] 
-      \node [anchor=north west, inner sep=3cm] at ([xshift=1.4cm,yshift=1.3cm]current page.north west)     {\includegraphics[height=8cm]{../../logos/SU_Seal_Red_R_Small.eps}};
+      \node [anchor=north west, inner sep=3cm] at ([xshift=-1.3cm,yshift=4cm]current page.north west)     {\includegraphics[width=20cm]{../../logos/baeri-logo.png}};
     \end{tikzpicture} 
 }
 \addtobeamertemplate{headline}{} 
 {
     \begin{tikzpicture}[remember picture,overlay] 
-      \node [anchor=north east, inner sep=3cm] at ([xshift=-8cm,yshift=1.3cm]current page.north east)     {\includegraphics[height=8cm]{../../logos/sunpy_powered_logo.png}}; 
+      \node [anchor=north east, inner sep=3cm] at ([xshift=-8cm,yshift=1.3cm]current page.north east)     {\includegraphics[height=8cm]{../../logos/SU_Seal_Red_R_Small.eps}};
     \end{tikzpicture} 
 }
 \addtobeamertemplate{headline}{} 
 {
     \begin{tikzpicture}[remember picture,overlay] 
-      \node [anchor=north east, inner sep=3cm] at ([xshift=2cm,yshift=1.3cm]current page.north east)     {\includegraphics[height=8cm]{../../logos/agu_centennial.png}}; 
+      \node [anchor=north east, inner sep=3cm] at ([xshift=0cm,yshift=2cm]current page.north east)     {\includegraphics[height=9cm]{../../logos/sunpy_powered_logo.png}}; 
     \end{tikzpicture} 
 }
+%\addtobeamertemplate{headline}{} 
+%{
+%    \begin{tikzpicture}[remember picture,overlay] 
+%      \node [anchor=north east, inner sep=3cm] at ([xshift=0cm,yshift=1.4cm]%current page.north east)     {\includegraphics[height=8.5cm]{../../%logos/agu_centennial.png}}; 
+%    \end{tikzpicture} 
+%}
 
 % Setup TeXFigure environment
 % spell-checker: disable %
@@ -98,7 +118,7 @@ manager = texfigure.Manager(
 % spell-checker: enable %
 
 \begin{frame}[fragile,t]
-\begin{columns}[t]
+\begin{columns}[T]
 \separatorcolumn
 
 \begin{column}{\colwidth}
@@ -106,25 +126,42 @@ manager = texfigure.Manager(
   \begin{block}{The Solar Dynamics Observatory}
     \begin{columns}
       \begin{column}{0.6667\columnwidth}
-        A picture of the Sun as captured by SDO
-
-        Followed by some facts about SDO/AIA and data products
-
-        Make sure to emphasize the problem we are trying to solve!
+        \begin{itemize}
+          \item The \alert{\textit{Solar Dynamics Observatory} (SDO)} \citep{pesnell_solar_2012} helps us understand the structure and generation of the Sun's magnetic field, how energy is stored and released in the solar corona, and how that energy is released into the heliosphere
+          \item SDO carries three scientific instruments
+          \begin{itemize}
+            \item \alert{\textit{Atmospheric Imaging Assembly} (AIA)} -- EUV and UV emission in corona and chromosphere
+            \item \alert{\textit{Helioseismic and Magnetic Imager} (HMI)} -- magnetic and velocity fields at the solar surface
+            \item \textit{Extreme Ultraviolet Variability Experiment} (EVE) -- disk-integrated spectral irradiance
+          \end{itemize}
+          \item AIA and HMI data publicly available and served to the community by \alert{\textit{Joint Science Operations Center} (JSOC)} \citep{couvidat_observables_2016} at Stanford University 
+        \end{itemize}
       \end{column}
-      \begin{column}{0.333\columnwidth}
+      \begin{column}{0.3\columnwidth}
         \begin{figure}
           \centering
           \includegraphics[width=\columnwidth]{figures/sdo.png}
         \end{figure}
       \end{column}
     \end{columns}
-
+    \begin{itemize}
+      \item Since May 2010, AIA has delivered nearly continuous \alert{4K resolution} images of the Sun in \alert{7 EUV wavelengths} at a \alert{cadence of 12 s}
+      \begin{itemize}
+        \item \alert{2 TB of data per day}
+        \item Current \alert{total of 15 PB} spread out over \alert{$\approx200\times10^6$ files} for AIA alone
+        \item Data volume is growing daily!
+      \end{itemize}
+      \item \alert{\textbf{Problem:}} Current software infrastructure and data access model inhibit users from taking full advantage of SDO data using modern computing capabilities
+      \item \alert{\textbf{Goal:}} Demonstrate need for a platform for \alert{scalable, interactive analysis of SDO data} using high performance computing (HPC) and open-source scientific software in Python
+    \end{itemize}
   \end{block}
 
-  \begin{block}{An Interactive and Scalable Python Workflow}
+  \begin{block}{An Interactive and Scalable Python Workflow for SDO Data}
 
-    Diagrams of old workflow
+    \begin{itemize}
+      \item Current SDO data workflow: make a query against JSOC using IDL, Python (via the \texttt{drms} Python module \citep{glogowski_drms_2019}), or via a web interface
+      \item Each time step and wavelength stored in a separate compressed FITS file, downloaded serially to the user's local workstation
+    \end{itemize}
 
     \begin{figure}
       \centering
@@ -133,7 +170,16 @@ manager = texfigure.Manager(
       %\resizebox{0.65\columnwidth}{!}{\import{figures/}{old_workflow.pdf_tex}}
     \end{figure}
 
-    Diagram of new workflow
+    \begin{itemize}
+      \item This workflow presents several limitations:
+      \begin{itemize}
+        \item Data transfer of many files over HTTP can be very slow (e.g. $>1$ day for 12 hours of AIA data in 6 EUV wavelengths)
+        \item High volume of requests stresses infrastructure of data provider
+        \item Requires large disk storage on user end
+        \item Single user workstations likely have limited computing capability
+      \end{itemize}
+      \item Proposed solution: \alert{move data source to a shared, hosted computing environment} 
+    \end{itemize}
 
     \begin{figure}
       \centering
@@ -142,25 +188,25 @@ manager = texfigure.Manager(
       %\resizebox{0.65\columnwidth}{!}{\import{figures/}{old_workflow.pdf_tex}}
     \end{figure}
 
-    Discuss each and why new one is better (briefly)
-
+    \begin{itemize}
+      \item Perform interactive analysis on \alert{NASA Pleiades HPC} resources via Jupyter notebook interface
+      \item All data on shared filesystem--only reduced science results transferred over network
+      \item Analyze data using modern Python stack for astronomy, e.g. \texttt{astropy} \citep{the_astropy_collaboration_astropy_2018}, \texttt{sunpy} \citep{sunpy_community_sunpypython_2015}, \texttt{ndcube}
+      \item \alert{Parallelize computations over $>10^3$ cores} using \texttt{dask} library for distributed computing \citep{rocklin_dask_2015}
+    \end{itemize}
 
   \end{block}
 
   \begin{block}{Current Infrastructure}
-
-    Describe what we've done so far
-
-    Data moved from JSOC to Ames (see slides from Art)
-
-    Query data using drms module \citet{glogowski_drms_2019}
-
-    Jupyter notebooks running on Pleiades
-
-    Emphasize use of Python
-
-    Make case for Merope as a good platform for these types of workflows
-
+    \begin{itemize}
+      \item Data Record Management Service (DRMS) software installed on NASA Pleiades hardware
+      \item Modified \texttt{drms} Python code such that \alert{queries return file paths on shared Lustre filesystem}
+      \item No bulk data download--data is fetched ``as needed'' based on science use cases
+      \item Computation scaled out over compute nodes using Dask ``meta scheduler'' on top of existing PBS scheduling software (see \href{https://github.com/dask/dask-jobqueue}{github.com/dask/dask-jobqueue})
+      \item Running on underutilized legacy Merope cluster -- 1,792 repurposed Intel Westmere processors each with \alert{12 cores, 48 GB memory}
+      \item Provided access to the entire Merope cluster, \alert{estimate that current level 1 AIA data set could be processed to level 1.5 in just over 2 days}
+      \item See \href{https://gitlab.com/wtbarnes/aia-on-pleiades}{gitlab.com/wtbarnes/aia-on-pleiades} for extended documentation and example notebooks
+    \end{itemize}
   \end{block}
 
 \end{column}
@@ -168,66 +214,42 @@ manager = texfigure.Manager(
 \separatorcolumn
 
 \begin{column}{\colwidth}
-
-  \begin{block}{Creating Level 1.5 Data Cubes}
-
-    Universal need for aligned (i.e. de-rotated) level 1.5 data cubes
-
-    Describe why this is important, what level 1.5 means
-
-    Easily parallelized, why this is important (speed)
-
-    Advantages of NDCube and Dask
-
-    Store as Zarr for efficient, cloud-ready access
-
-    Show Dask layout glyph, NDCube data model
-
-    Estimate of how long it would take to process the current data volume from level 1 to level 1.5
-  
-  \end{block}
-
   \include{panels/example_euv_waves}
   \include{panels/example_time_lags}
-
 \end{column}
 
 \separatorcolumn
 
 \begin{column}{\colwidth}
-
   \include{panels/example_sunspots}
-
-  \begin{block}{Example: Calculating SHARP Features}
-
-    Describe SHARPs: what they are, why they are useful, e.g. \citet{bobra_helioseismic_2014}
-
-    Justify why recalculating them is useful (i.e. ML)
-
-    Comment on speed increase of calculating in parallel
-
-    Plot one of them (e.g. total unsigned flux) as a function of time
-
-  \end{block}
+  \vspace{-3ex}
+  \include{panels/example_sharps}
 
   \begin{block}{Conclusions and Future Work}
-
-    What do these examples demonstrate?
-
-    Recommendation: heliophysics needs a hosted computing platform for interactive data analysis!
-
-    Other disciplines are already embracing this, e.g. LSST, JWST, Pangeo
-
-    Adoption of Python is crucial to making this happen 
-
-    Will become increasingly important as data volumes grow, e.g. DKIST
-
+    \begin{columns}
+    \begin{column}{0.75\columnwidth}
+      \begin{itemize}
+        \item Demonstrated viability of SDO analysis at scale using NASA Pleiades and Dask for wide variety of science applications
+        \item Data locality combined with scalable computing \alert{critical to maximizing scientific return of the SDO dataset}
+        \item \textbf{\alert{Recommendation:}} a hosted computing platform for heliophysics -- already adopted by other disciplines (e.g. Pangeo, LSST)
+        \item Cloud/HPC increasingly important as data sets grow in size and complexity (e.g. DKIST)
+        \item \alert{Open development of Python analysis tools is crucial to this effort} 
+        \item \textbf{Scan QR code for screencasts of example applications}
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.25\columnwidth}
+      \begin{figure}
+        \centering
+        \includegraphics[width=\columnwidth]{figures/qr-code.eps}
+      \end{figure}
+    \end{column}
+    \end{columns}
   \end{block}
 
   \begin{block}{References}
     \scriptsize
 
-    We thank Wei Liu, Ignacio Ugarte-Urra, and Fraser Watson for their help in developing example use cases. We also thank Jeff Becker and Bob Ciotti for their assistance with the Pleiades HPC system. 
+    We thank Wei Liu, Ignacio Ugarte-Urra, and Fraser Watson for their help in developing example use cases. We also thank Jeff Becker and Bob Ciotti for their assistance with the Pleiades HPC system. This poster was typeset using Lua\TeX and Python\TeX \citep{poore_pythontex_2015}.
 
       \begin{multicols}{2}
         \bibliographystyle{aasjournal.bst}
