@@ -1,10 +1,18 @@
-\begin{block}{Example: Time Lag Analysis}
+\begin{block}{Application: Time Lag Analysis of Quiescent Active Regions}
 
-How can time lag analysis be used to understand coronal heating \citet{viall_evidence_2012}
-
-Describe time lag mathematically \citet{barnes_understanding_2019}
-
-Show time lag and cross correlation maps for a single channel pair (side by side)
+\begin{itemize}
+    \item Time lag analysis method of \citet{viall_evidence_2012} can provide \alert{important diagnostic of coronal heating models in active regions} \citep[e.g][]{barnes_understanding_2019}
+    \item Time lag, $\tau_{AB}$, is the temporal delay that maximizes cross-correlation between light curves in channels $A$ and $B$,
+    \begin{equation*}
+        \tau_{AB} = \argmax_{\tau}\mathcal{C}_{AB},
+    \end{equation*}
+    where $\mathcal{C}_{AB}$ is the cross-correlation between channels $A$ and $B$,
+    \begin{equation*}
+        \mathcal{C}_{AB}(\tau) = \inversefourier{\fourier{\mathcal{I}_A(-t)}\fourier{\mathcal{I}_B(t)}},
+    \end{equation*}
+    and $\mathcal{I}_A(t)$ is the intensity in channel $A$ \citep{barnes_understanding_2019}
+    \item $\tau_{AB}$ provides proxy for cooling time between channels, can reveal large-scale cooling patterns if calculated for each pixel in an active region
+\end{itemize}
 
 % spell-checker: disable %
 \begin{pycode}[manager]
@@ -14,7 +22,7 @@ m_cc = sunpy.map.Map(os.path.join(manager.data_dir, 'max_cc_94_171.fits'))
 fig = plt.figure(figsize=texfigure.figsize(
     pytex,
     scale=1,
-    height_ratio=0.5,
+    height_ratio=0.6,
     figure_width_context='figurewidth',
 ))
 # timelag map
@@ -69,14 +77,49 @@ cbar = fig.colorbar(im, cax=cax, orientation='horizontal')
 cbar.ax.xaxis.set_ticks_position('top')
 # Save
 tfig = manager.save_figure('time-lag-maps', fext='.pdf')
-tfig.caption = r''
-tfig.figure_width = r'0.95\columnwidth'
+tfig.caption = r'Time lag (\textbf{left}) and maximum cross-correlation (\textbf{right}) maps of NOAA 11109 for the 94,171 \angstrom{} channel pair. The red and yellow colors in the left panel indicate plasma cooling from the 94 \angstrom{} channel into the 171 \angstrom{} channel.'
+tfig.figure_width = r'0.75\columnwidth'
 \end{pycode}
 \py[manager]|tfig|
 % spell-checker: enable %
 
-Explain how dask helps speed up
+\begin{itemize}
+    \item Calculation parallelizes trivially using Fourier transform function provided by \texttt{dask} 
+    \item For 12 hours of full cadence data cropped to a field of view $450''\times450''$, \alert{can compute $\tau_{AB}$ in $<30$ s using 1200 cores}
+    \item Performing equivalent calculation in IDL by calling \texttt{c\_correlate.pro} in serial would take $\approx1$ hour -- \alert{speedup by a factor of $>100$}
+\end{itemize}
 
-Show scaling of time lag calculation with number of cores
+% spell-checker: disable %
+\begin{pycode}[manager]
+tab = astropy.table.QTable.read(
+    os.path.join(manager.data_dir, 'scaling_table.fits')
+)
+i_max = tab['compute_time'].argmax()
+# Crude model of theoretical scaling
+ideal_scaling = lambda x: tab['cores'][i_max] * tab['compute_time'][i_max] / x
+# Plot
+fig = plt.figure(figsize=texfigure.figsize(
+    pytex,
+    scale=0.65,
+    height_ratio=0.6,
+    #figure_width_context='figurewidth',
+))
+ax = fig.gca()
+ax.plot(tab['cores'], tab['compute_time'],
+        ls='', marker='o', markersize=12, color=PALETTE[0], label='measured')
+ax.plot(tab['cores'], ideal_scaling(tab['cores']),
+        color=PALETTE[1], label='ideal')
+ax.set_yscale('log')
+ax.set_xscale('log')
+ax.set_xlabel('Number of Cores')
+ax.set_ylabel(r'Compute Time [s]')
+ax.legend(loc=1)
+# Save
+tfig = manager.save_figure('time-lag-scaling', fext='.pgf')
+tfig.caption = r'Compute time of above time lag calculation as a function of number of computing cores. The blue dots show the measured compute times on the Merope cluster while the orange line shows the ideal scaling. The deviation from the ideal scaling is likely due to latency incurred by communication between workers.'
+tfig.figure_width = r'\columnwidth'
+\end{pycode}
+\py[manager]|tfig|
+% spell-checker: enable %
 
 \end{block}

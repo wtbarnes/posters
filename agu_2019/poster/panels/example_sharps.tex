@@ -1,0 +1,45 @@
+\begin{block}{Application: Calculating SHARP Features}
+
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+% spell-checker: disable %
+\begin{pycode}[manager]
+tab = astropy.table.QTable.read(
+    os.path.join(manager.data_dir, 'sharps_unsigned_flux_table.fits'))
+tab['time'] = astropy.time.Time(tab['time'], scale='tai')
+fig = plt.figure(figsize=texfigure.figsize(
+    pytex,
+    scale=1,
+    height_ratio=1,
+))
+ax = fig.gca()
+with time_support(simplify=True):
+    # (tab['time']-tab['time'][0]).to(u.h)
+    ax.plot(tab['time'], tab['unsigned_flux']/1e22,
+            color=PALETTE[0], label='modified')
+    ax.plot(tab['time'], tab['unsigned_flux_fits']/1e22,
+            color=PALETTE[1], label='original')
+ax.set_xlabel(f'Time')
+ax.set_ylabel('Total Unsigned Flux [$10^{22}$ Mx]')
+ax.set_ylim(2, 5.5)
+ax.legend(loc=2)
+tfig = manager.save_figure('sharps-unsigned-flux', fext='.pgf')
+tfig.caption = f'Evolution of the total unsigned flux over a period of 7 days starting on {tab["time"][0]} for active region NOAA 11158. The blue curve shows the unsigned flux computed using the modified SHARPs calculation with Dask while the orange curve shows the unsigned flux values extracted from the SHARPs metadata.'
+tfig.figure_width = r'\columnwidth'
+\end{pycode}
+\py[manager]|tfig|
+% spell-checker: enable %
+\end{column}
+
+\begin{column}{0.5\columnwidth}
+\begin{itemize}
+    \item Space-weather HMI Active Region Patches \citep[SHARPS,][]{bobra_helioseismic_2014} data products include keywords describing various physical parameters of active regions (e.g. total unsigned flux)
+    \item \alert{Scalar parameters often used in machine learning context} \citep[e.g.][]{bobra_solar_2015, zheng_solar_2019} because they can be accessed without downloading image data
+    \item Recalculating SHARP features for varying input parameters \alert{may influence predictions of machine learning models}--important to understand why and how
+    \item Recalculated total unsigned flux for active region NOAA 11158 over 7 days in $\approx30$ s in parallel via \texttt{dask} and \texttt{numpy}
+    \item \alert{Estimate that every SHARP parameter for all $~2.7\times10^6$ images could be recalculated in a matter of days using $10^3$ cores}
+\end{itemize}
+\end{column}
+\end{columns}
+
+\end{block}
