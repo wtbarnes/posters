@@ -1,4 +1,4 @@
-\begin{block}{Application: Calculating SHARP Features}
+\begin{block}{Application: Calculating Space-Weather Parameters}
 
 \begin{columns}
 \begin{column}{0.5\columnwidth}
@@ -14,14 +14,12 @@ fig = plt.figure(figsize=texfigure.figsize(
 ))
 ax = fig.gca()
 with time_support(simplify=True):
-    # (tab['time']-tab['time'][0]).to(u.h)
     ax.plot(tab['time'], tab['unsigned_flux']/1e22,
             color=PALETTE[0], label='modified')
     ax.plot(tab['time'], tab['unsigned_flux_fits']/1e22,
             color=PALETTE[1], label='original')
 ax.set_xlabel(f'Time')
 ax.set_ylabel('Total Unsigned Flux [$10^{22}$ Mx]')
-ax.set_ylim(2, 5.5)
 ax.legend(loc=2)
 tfig = manager.save_figure('sharps-unsigned-flux', fext='.pgf')
 tfig.caption = f'Evolution of the total unsigned flux over a period of 7 days starting on {tab["time"][0]} for active region NOAA 11158. The blue curve shows the unsigned flux computed using the modified SHARPs calculation with Dask while the orange curve shows the unsigned flux values extracted from the SHARPs metadata.'
